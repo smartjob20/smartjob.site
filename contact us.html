@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تماس با ما | اسمارت جاب</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --primary: #6e8efb;
+            --secondary: #a777e3;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-link {
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .contact-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .input-field {
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .input-field:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(110, 142, 251, 0.2);
+        }
+        
+        .map-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .floating-label {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            transition: all 0.2s ease;
+            pointer-events: none;
+            color: #64748b;
+        }
+        
+        .input-field:focus + .floating-label,
+        .input-field:not(:placeholder-shown) + .floating-label {
+            top: -8px;
+            right: 10px;
+            font-size: 12px;
+            background-color: white;
+            padding: 0 5px;
+            color: var(--primary);
+        }
+        
+        .animate-wave {
+            animation: wave 2s infinite;
+        }
+        
+        @keyframes wave {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-xl">SJ</div>
+                <span class="mr-2 font-bold text-xl gradient-text">اسمارت جاب</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-6 space-x-reverse">
+				<a href="index.html" class="nav-link text-gray-700 hover:text-purple-600 transition">خانه</a>
+                <a href="services.html" class="nav-link text-gray-700 hover:text-purple-600 transition">خدمات</a>
+                <a href="nemoone.html" class="nav-link text-gray-700 hover:text-purple-600 transition">نمونه کارها</a>
+				<a href="features.html" class="nav-link text-gray-700 hover:text-purple-600 transition">ویژگی‌ها</a>
+                <a href="farayand.html" class="nav-link text-gray-700 hover:text-purple-600 transition">فرآیند کار</a>
+                <a href="tarefe.html" class="nav-link text-gray-700 hover:text-purple-600 transition">تعرفه‌ها</a>
+				<a href="about us.html" class="nav-link text-gray-700 hover:text-purple-600 transition">درباره ما</a>
+                <a href="contact us.html" class="nav-link text-gray-700 hover:text-purple-600 transition">تماس با ما</a>
+				<a href="weblog.html" class="nav-link text-gray-700 hover:text-purple-600 transition">وبلاگ ها</a>
+            </div>
+            
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <a href="moshavere.html" class="hidden md:block gradient-bg hover:opacity-90 text-white font-bold py-2 px-4 rounded-full transition text-sm">درخواست مشاوره</a>
+                <button id="mobileMenuButton" class="md:hidden text-gray-700 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 gradient-bg text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==')]"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 flex flex-col items-center text-center relative z-10">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">با ما در ارتباط باشید</h1>
+                <p class="text-xl mb-8 opacity-90">ما آماده پاسخگویی به سوالات و پیشنهادات شما هستیم</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+					
+                    <a href="#contact-form" class="bg-white text-purple-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-full transition duration-300 text-center shadow-lg hover:shadow-xl">ارسال پیام</a>
+					
+                    <a href="#contact-info" class="bg-white text-purple-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-full transition duration-300 text-center shadow-lg hover:shadow-xl">
+                        <i class="fas fa-phone-alt ml-2 "></i> اطلاعات تماس
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-0 left-0 w-full">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#f8fafc" fill-opacity="1" d="M0,160L48,170.7C96,181,192,203,288,202.7C384,203,480,181,576,181.3C672,181,768,203,864,218.7C960,235,1056,245,1152,234.7C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Contact Info -->
+    <section id="contact-info" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">راه‌های ارتباطی</span>
+                <h2 class="text-3xl font-bold mb-4">ما اینجا هستیم تا به شما کمک کنیم</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">از طریق روش‌های مختلف می‌توانید با ما در ارتباط باشید. تیم پشتیبانی ما آماده پاسخگویی به سوالات شماست.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Phone -->
+                <div class="contact-card bg-gray-50 rounded-xl p-8 text-center">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-6 animate-wave">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">تماس تلفنی</h3>
+                    <p class="text-gray-500 mb-4">برای مشاوره و پشتیبانی با ما تماس بگیرید</p>
+                    <div class="space-y-2">
+                        <!--<a href="tel:+982112345678" class="block text-gray-700 hover:text-purple-600 transition font-medium">
+                            <i class="fas fa-phone ml-2"></i> ۰۲۱-۱۲۳۴۵۶۷۸
+                        </a>-->
+                        <a href="tel:+989175913293" class="block text-gray-700 hover:text-purple-600 transition font-medium">
+                            <i class="fas fa-mobile-alt ml-2"></i> 0917-5913293
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Email -->
+                <div class="contact-card bg-gray-50 rounded-xl p-8 text-center">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-6 animate-wave" style="animation-delay: 0.2s;">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">ایمیل</h3>
+                    <p class="text-gray-500 mb-4">پیام‌های خود را از طریق ایمیل برای ما ارسال کنید</p>
+                    <div class="space-y-2">
+                        <a href="mailto:info@digitalstudio.com" class="block text-gray-700 hover:text-purple-600 transition font-medium">
+                            <i class="fas fa-envelope ml-2"></i> smartjob.site.seo
+                        </a>
+                        <!--<a href="mailto:support@digitalstudio.com" class="block text-gray-700 hover:text-purple-600 transition font-medium">
+                            <i class="fas fa-headset ml-2"></i> support@digitalstudio.com
+                        </a>--> 
+                    </div>
+                </div>
+                
+                <!-- Social -->
+                <div class="contact-card bg-gray-50 rounded-xl p-8 text-center">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-6 animate-wave" style="animation-delay: 0.4s;">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">شبکه‌های اجتماعی</h3>
+                    <p class="text-gray-500 mb-4">ما را در شبکه‌های اجتماعی دنبال کنید</p>
+                    <div class="flex justify-center space-x-4 space-x-reverse">
+						<a href="https://t.me/Amir_hyg" target="_blank" class="social-icon w-10 h-10 bg-blue-500 hover:bg-blue-600 text-white rounded-full flex items-center justify-center" title="در تلگرام چت کنید (ممکن است نیاز به فیلترشکن داشته باشید)">
+                        <i class="fab fa-telegram"></i>
+                           </a>
+
+                        <a href="https://instagram.com/smartjob_site" target="_blank" class="social-icon w-10 h-10 bg-pink-600 hover:bg-pink-700 text-white rounded-full flex items-center justify-center" title="مشاهده در اینستاگرام">
+                           <i class="fab fa-instagram"></i>
+                           </a>
+
+                        <a href="#" class="social-icon w-10 h-10 bg-blue-700 hover:bg-blue-800 text-white rounded-full flex items-center justify-center">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form & Map -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Contact Form -->
+                <div id="contact-form" class="bg-white rounded-xl shadow-md p-8">
+                    <div class="mb-8">
+                        <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-2">ارسال پیام</span>
+                        <h2 class="text-2xl font-bold mb-2">پیام خود را ارسال کنید</h2>
+                        <p class="text-gray-600">فرم زیر را پر کنید تا در اسرع وقت با شما تماس بگیریم</p>
+                    </div>
+                    
+                    <form class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="relative">
+                                <input type="text" id="name" class="input-field w-full p-4 rounded-lg focus:outline-none" placeholder=" ">
+                                <label for="name" class="floating-label">نام کامل</label>
+                            </div>
+                            
+                            <div class="relative">
+                                <input type="email" id="email" class="input-field w-full p-4 rounded-lg focus:outline-none" placeholder=" ">
+                                <label for="email" class="floating-label">آدرس ایمیل</label>
+                            </div>
+                        </div>
+                        
+                        <div class="relative">
+                            <input type="text" id="subject" class="input-field w-full p-4 rounded-lg focus:outline-none" placeholder=" ">
+                            <label for="subject" class="floating-label">موضوع پیام</label>
+                        </div>
+                        
+                        <div class="relative">
+                            <select id="service" class="input-field w-full p-4 rounded-lg focus:outline-none appearance-none">
+                                <option value="" selected disabled>انتخاب کنید</option>
+                                <option value="web-design">طراحی وبسایت</option>
+                                <option value="seo">سئو و بهینه‌سازی</option>
+                                <option value="digital-marketing">دیجیتال مارکتینگ</option>
+                                <option value="app-development">توسعه اپلیکیشن</option>
+                                <option value="other">سایر خدمات</option>
+                            </select>
+                            <label for="service" class="floating-label">نوع خدمات مورد نظر</label>
+                            <div class="absolute left-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-chevron-down text-gray-400"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="relative">
+                            <textarea id="message" rows="5" class="input-field w-full p-4 rounded-lg focus:outline-none" placeholder=" "></textarea>
+                            <label for="message" class="floating-label">متن پیام</label>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <input type="checkbox" id="agreement" class="rounded border-gray-300 text-purple-600 focus:ring-purple-500">
+                            <label for="agreement" class="mr-2 text-sm text-gray-600">با <a href="#" class="text-purple-600 hover:underline">قوانین و مقررات</a> موافق هستم</label>
+                        </div>
+                        
+                        <button type="submit" class="w-full gradient-bg hover:opacity-90 text-white font-bold py-4 px-6 rounded-lg transition duration-300">
+                            <i class="fas fa-paper-plane ml-2"></i> ارسال پیام
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Map & Address -->
+                <div>
+                    <div class="map-container h-96 mb-8">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.772172889687!2d51.38882131527074!3d35.71525898018757!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDQyJzU0LjkiTiA1McKwMjMnMjYuNiJF!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-md p-8">
+                        <div class="flex items-start mb-6">
+                            <div class="bg-purple-100 text-purple-600 p-3 rounded-lg mr-4">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-2">آدرس دفتر مرکزی</h3>
+                                <p class="text-gray-600">تهران، خیابان ولیعصر، پلاک ۱۲۳۴، طبقه ۵، واحد ۱۲</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 text-blue-600 p-3 rounded-lg mr-4">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-2">ساعات کاری</h3>
+                                <p class="text-gray-600 mb-1">شنبه تا پنجشنبه: ۸:۳۰ صبح تا 12 شب</p>
+                                <p class="text-gray-600">&nbsp; </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-3xl">
+            <div class="text-center mb-12">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">سوالات متداول</span>
+                <h2 class="text-3xl font-bold mb-4">پاسخ به سوالات شما</h2>
+                <p class="text-gray-600">پاسخ سوالات متداول درباره تماس با ما را اینجا پیدا کنید</p>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Question 1 -->
+                <div class="bg-gray-50 rounded-lg shadow-sm overflow-hidden">
+                    <button class="faq-question w-full flex justify-between items-center p-6 text-right focus:outline-none">
+                        <span class="font-bold text-lg">ساعات پاسخگویی تلفنی چه زمانی است؟</span>
+                        <i class="fas fa-chevron-down text-purple-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 hidden">
+                        <p class="text-gray-600">تیم پشتیبانی ما از شنبه تا پنجشنبه از ساعت ۸:۳۰ تا 12 شب آماده پاسخگویی به تماس‌های شماهستند. همچنین می‌توانید در خارج از این ساعات از طریق فرم تماس یا ایمیل با ما در ارتباط باشید.</p>
+                    </div>
+                </div>
+                
+                <!-- Question 2 -->
+                <div class="bg-gray-50 rounded-lg shadow-sm overflow-hidden">
+                    <button class="faq-question w-full flex justify-between items-center p-6 text-right focus:outline-none">
+                        <span class="font-bold text-lg">مدت زمان پاسخگویی به ایمیل چقدر است؟</span>
+                        <i class="fas fa-chevron-down text-purple-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 hidden">
+                        <p class="text-gray-600">ما معمولاً در کمتر از ۲۴ ساعت کاری به ایمیل‌های دریافتی پاسخ می‌دهیم. در صورتی که پیام شما در روزهای تعطیل یا خارج از ساعات کاری ارسال شود، در اولین روز کاری پاسخ داده خواهد شد.</p>
+                    </div>
+                </div>
+                
+                <!-- Question 3 -->
+                <div class="bg-gray-50 rounded-lg shadow-sm overflow-hidden">
+                    <button class="faq-question w-full flex justify-between items-center p-6 text-right focus:outline-none">
+                        <span class="font-bold text-lg">آیا امکان مراجعه حضوری بدون هماهنگی قبلی وجود دارد؟</span>
+                        <i class="fas fa-chevron-down text-purple-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 hidden">
+                        <p class="text-gray-600">به دلیل برنامه‌ریزی دقیق جلسات و مشاوره‌ها، لطفاً قبل از مراجعه حضوری حتماً از طریق تلفن یا فرم تماس با ما هماهنگ کنید تا در زمان مناسب پذیرای شما باشیم و بتوانیم به بهترین شکل به نیازهای شما رسیدگی کنیم.</p>
+                    </div>
+                </div>
+                
+                <!-- Question 4 -->
+                <div class="bg-gray-50 rounded-lg shadow-sm overflow-hidden">
+                    <button class="faq-question w-full flex justify-between items-center p-6 text-right focus:outline-none">
+                        <span class="font-bold text-lg">چطور می‌توانم از وضعیت پروژه خود مطلع شوم؟</span>
+                        <i class="fas fa-chevron-down text-purple-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 hidden">
+                        <p class="text-gray-600">برای هر پروژه یک مدیر پروژه اختصاص داده می‌شود که می‌توانید از طریق شماره تماس مستقیم یا ایمیل با ایشان در ارتباط باشید. همچنین گزارش‌های پیشرفت پروژه به صورت منظم برای شما ارسال خواهد شد.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-8 md:p-12 text-white">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-2/3 mb-6 md:mb-0">
+                        <h2 class="text-2xl md:text-3xl font-bold mb-4">آماده شروع پروژه خود هستید؟</h2>
+                        <p class="text-lg opacity-90">همین امروز با ما تماس بگیرید و از مشاوره رایگان ما بهره‌مند شوید</p>
+                    </div>
+                    <div class="md:w-1/3 flex justify-center md:justify-end">
+                        <a href="#contact-form" class="bg-white text-purple-600 hover:bg-gray-100 font-bold py-3 px-8 rounded-full transition duration-300 text-center shadow-lg hover:shadow-xl whitespace-nowrap">
+                            <i class="fas fa-paper-plane ml-2"></i> ارسال درخواست
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <!-- About -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-xl">SJ</div>
+                        <span class="mr-2 font-bold text-xl gradient-text">اسمارت جاب</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">ما با ترکیب خلاقیت و تکنولوژی، کسب و کار شما را در دنیای دیجیتال متحول می‌کنیم.</p>
+                    <div class="flex space-x-4 space-x-reverse">
+                        <a href="#" class="bg-gray-800 hover:bg-purple-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="bg-gray-800 hover:bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="bg-gray-800 hover:bg-blue-500 text-white w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="bg-gray-800 hover:bg-red-500 text-white w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">خدمات</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">طراحی سایت اختصاصی</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">فروشگاه اینترنتی</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">سئو و بهینه‌سازی سایت</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">طراحی اپلیکیشن موبایل</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">دیجیتال مارکتینگ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Links -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">لینک‌های مفید</h3>
+                    <ul class="space-y-2">
+                        <li><a href="nemoone.html" class="text-gray-400 hover:text-white transition">نمونه کارها</a></li>
+                        <li><a href="weblog.html" class="text-gray-400 hover:text-white transition">وبلاگ</a></li>
+                        <li><a href="about us.html" class="text-gray-400 hover:text-white transition">درباره ما</a></li>
+                        <li><a href="contact us.html" class="text-gray-400 hover:text-white transition">تماس با ما</a></li>
+                        <li><a href="" class="text-gray-400 hover:text-white transition">سوالات متداول</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">تماس با ما</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-purple-500 mt-1 ml-2"></i>
+                            <span class="text-gray-400">شیراز </span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-purple-500 mt-1 ml-2"></i>
+                            <span class="text-gray-400">09175913293</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-purple-500 mt-1 ml-2"></i>
+                            <span class="text-gray-400">smartjob.site.seo@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">© 1404 اسمارت جاب. تمام حقوق محفوظ است.</p>
+                <div class="flex space-x-6 space-x-reverse">
+                    <a href="#" class="text-gray-500 hover:text-white transition">قوانین و مقررات</a>
+                    <a href="#" class="text-gray-500 hover:text-white transition">حریم خصوصی</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#" id="backToTop" class="fixed bottom-8 left-8 w-12 h-12 gradient-bg rounded-full flex items-center justify-center text-white shadow-lg back-to-top hidden">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.remove('hidden');
+            } else {
+                backToTop.classList.add('hidden');
+            }
+        });
+        
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
+                
+                answer.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Floating Labels
+        const inputFields = document.querySelectorAll('.input-field');
+        
+        inputFields.forEach(input => {
+            input.addEventListener('focus', () => {
+                const label = input.nextElementSibling;
+                label.classList.add('text-purple-600');
+            });
+            
+            input.addEventListener('blur', () => {
+                if (!input.value) {
+                    const label = input.nextElementSibling;
+                    label.classList.remove('text-purple-600');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

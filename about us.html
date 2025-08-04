@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درباره ما | اسمارت جاب</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --primary: #6e8efb;
+            --secondary: #a777e3;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 0 0 4px rgba(110, 142, 251, 0.2);
+        }
+        
+        .team-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(167, 119, 227, 0.1);
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: rgba(167, 119, 227, 0.3);
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .nav-link {
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: linear-gradient(135deg, rgba(110, 142, 251, 0.1), rgba(167, 119, 227, 0.1));
+            color: var(--secondary);
+        }
+        
+        .video-modal {
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .video-modal.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .video-overlay {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        
+        .video-container {
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+        
+        .video-modal.open .video-container {
+            transform: scale(1);
+        }
+        
+        .value-card {
+            transition: all 0.3s ease;
+            perspective: 1000px;
+        }
+        
+        .value-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .value-card:hover .value-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .value-card-front, .value-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .value-card-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .pattern-bg {
+            background-image: radial-gradient(rgba(110, 142, 251, 0.1) 2px, transparent 2px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-xl">SJ</div>
+                <span class="mr-2 font-bold text-xl gradient-text">اسمارت جاب</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-6 space-x-reverse">
+				<a href="index.html" class="nav-link text-gray-700 hover:text-purple-600 transition">خانه</a>
+                <a href="services.html" class="nav-link text-gray-700 hover:text-purple-600 transition">خدمات</a>
+                <a href="nemoone.html" class="nav-link text-gray-700 hover:text-purple-600 transition">نمونه کارها</a>
+				<a href="features.html" class="nav-link text-gray-700 hover:text-purple-600 transition">ویژگی‌ها</a>
+                <a href="farayand.html" class="nav-link text-gray-700 hover:text-purple-600 transition">فرآیند کار</a>
+                <a href="tarefe.html" class="nav-link text-gray-700 hover:text-purple-600 transition">تعرفه‌ها</a>
+				<a href="about us.html" class="nav-link text-gray-700 hover:text-purple-600 transition">درباره ما</a>
+                <a href="contact us.html" class="nav-link text-gray-700 hover:text-purple-600 transition">تماس با ما</a>
+				<a href="weblog.html" class="nav-link text-gray-700 hover:text-purple-600 transition">وبلاگ ها</a>
+            </div>
+            
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <a href="moshavere.html" class="hidden md:block gradient-bg hover:opacity-90 text-white font-bold py-2 px-4 rounded-full transition text-sm">درخواست مشاوره</a>
+                <button id="mobileMenuButton" class="md:hidden text-gray-700 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu bg-white shadow-lg md:hidden">
+            <div class="px-4 py-3 space-y-3">
+                <a href="index.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">خانه</a>
+                <a href="services.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">خدمات</a>
+                <a href="portfolio.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">نمونه کارها</a>
+                <a href="process.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">فرآیند کار</a>
+                <a href="about.html" class="block py-2 px-4 rounded-lg bg-purple-50 text-purple-600 transition">درباره ما</a>
+                <a href="pricing.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">تعرفه‌ها</a>
+                <a href="blog.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">وبلاگ</a>
+                <a href="contact.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">تماس با ما</a>
+                <a href="consultation.html" class="block gradient-bg hover:opacity-90 text-white font-bold py-2 px-4 rounded-full transition text-center">درخواست مشاوره</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 gradient-bg text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==')]"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">درباره <span class="text-yellow-400">اسمارت جاب</span></h1>
+                <p class="text-xl opacity-90 mb-8">ما با ترکیب خلاقیت و تکنولوژی، کسب و کار شما را در دنیای دیجیتال متحول می‌کنیم. از سال 1401 تاکنون بیش از 70 پروژه موفق را به سرانجام رسانده‌ایم.</p>
+                <div class="flex justify-center space-x-4 space-x-reverse">
+                    <a href="contact us.html" class="bg-white text-purple-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-full transition duration-300 text-center shadow-lg hover:shadow-xl">تماس با ما</a>
+                    <a href="#" id="playButton" class="flex items-center justify-center border-2 border-white hover:bg-white hover:bg-opacity-10 font-bold py-3 px-6 rounded-full transition duration-300 text-center">
+                        <i class="fas fa-play ml-2"></i> ویدئو معرفی
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute -bottom-20 left-0 right-0 h-40 bg-gradient-to-t from-white to-transparent"></div>
+    </section>
+
+    <!-- About Intro -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2">
+                    <div class="relative">
+                        <img src="img/poster 2.png" alt="تیم دیجیتال استودیو" class="rounded-2xl shadow-xl w-full">
+                        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-purple-500 rounded-2xl shadow-lg flex flex-col items-center justify-center text-white p-4">
+                            <span class="text-3xl font-bold">3+</span>
+                            <span class="text-sm text-center">سال تجربه موفق</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 mt-10 lg:mt-0">
+                    <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">معرفی</span>
+                    <h2 class="text-3xl font-bold mb-6">ما که هستیم؟</h2>
+                    <p class="text-gray-600 mb-6">اسمارت جاب یک تیم خلاق و متخصص در زمینه طراحی و توسعه وبسایت، سئو و دیجیتال مارکتینگ است که در سال 1402 با هدف ارائه خدمات حرفه‌ای دیجیتال تأسیس شد.</p>
+                    <p class="text-gray-600 mb-8">ما باور داریم که هر کسب و کاری شایسته یک حضور حرفه‌ای در دنیای دیجیتال است. تیم ما متشکل از طراحان، توسعه‌دهندگان و متخصصان سئو است که با همکاری یکدیگر، راهکارهای دیجیتال مناسبی برای رشد کسب و کار شما ارائه می‌دهند.</p>
+                    
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-start">
+                            <div class="feature-icon">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <div class="mr-4">
+                                <h4 class="font-bold mb-1">کیفیت بالا</h4>
+                                <p class="text-gray-600 text-sm">تضمین کیفیت تمام پروژه‌ها</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="feature-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <div class="mr-4">
+                                <h4 class="font-bold mb-1">پشتیبانی 24/7</h4>
+                                <p class="text-gray-600 text-sm">پشتیبانی دائمی حتی پس از تحویل</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="feature-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="mr-4">
+                                <h4 class="font-bold mb-1">راهکارهای خلاقانه</h4>
+                                <p class="text-gray-600 text-sm">ارائه راهکارهای نوآورانه</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="mr-4">
+                                <h4 class="font-bold mb-1">تضمین رشد</h4>
+                                <p class="text-gray-600 text-sm">تضمین رشد کسب و کار شما</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="nemoone.html" class="inline-flex items-center gradient-bg hover:opacity-90 text-white font-bold py-3 px-6 rounded-full transition shadow-lg hover:shadow-xl">
+                        مشاهده نمونه کارها
+                        <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Mission -->
+    <section class="py-16 bg-gray-50 pattern-bg">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">ماموریت ما</span>
+                <h2 class="text-3xl font-bold mb-4">چرا اسمارت جاب را انتخاب کنید؟</h2>
+                <p class="text-gray-600">ما با ارائه راهکارهای خلاقانه و تکنولوژی‌های روز دنیا، کسب و کار شما را به سطح جدیدی می‌رسانیم.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Value 1 -->
+                <div class="value-card h-64">
+                    <div class="value-card-inner h-full">
+                        <div class="value-card-front bg-white rounded-xl shadow-sm p-8 flex flex-col justify-center">
+                            <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center text-white text-2xl mb-4 mx-auto">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-center">ماموریت</h3>
+                            <p class="text-gray-600 text-center">کلیک کنید</p>
+                        </div>
+                        <div class="value-card-back">
+                            <h3 class="text-xl font-bold mb-3 text-center text-white">ماموریت ما</h3>
+                            <p class="text-white opacity-90 text-center">ارائه راهکارهای دیجیتال خلاقانه و مؤثر برای رشد کسب و کارهای ایرانی با استفاده از آخرین تکنولوژی‌های روز دنیا</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Value 2 -->
+                <div class="value-card h-64">
+                    <div class="value-card-inner h-full">
+                        <div class="value-card-front bg-white rounded-xl shadow-sm p-8 flex flex-col justify-center">
+                            <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center text-white text-2xl mb-4 mx-auto">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-center">چشم‌انداز</h3>
+                            <p class="text-gray-600 text-center">کلیک کنید</p>
+                        </div>
+                        <div class="value-card-back">
+                            <h3 class="text-xl font-bold mb-3 text-center text-white">چشم‌انداز ما</h3>
+                            <p class="text-white opacity-90 text-center">تبدیل شدن به برترین استودیوی دیجیتال در منطقه با ارائه خدمات نوآورانه و استانداردهای جهانی</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Value 3 -->
+                <div class="value-card h-64">
+                    <div class="value-card-inner h-full">
+                        <div class="value-card-front bg-white rounded-xl shadow-sm p-8 flex flex-col justify-center">
+                            <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center text-white text-2xl mb-4 mx-auto">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-center">ارزش‌ها</h3>
+                            <p class="text-gray-600 text-center">کلیک کنید</p>
+                        </div>
+                        <div class="value-card-back">
+                            <h3 class="text-xl font-bold mb-3 text-center text-white">ارزش‌های ما</h3>
+                            <p class="text-white opacity-90 text-center">خلاقیت، صداقت، تعهد، کیفیت و نوآوری پایه‌های اصلی فعالیت ما هستند</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">تاریخچه</span>
+                <h2 class="text-3xl font-bold mb-4">داستان ما</h2>
+                <p class="text-gray-600">سفر اسمارت جاب از یک ایده کوچک تا تبدیل شدن به یک تیم حرفه‌ای</p>
+            </div>
+            
+            <div class="relative timeline">
+                <!-- Timeline Items -->
+                <div class="space-y-16">
+                    <!-- Timeline 1 -->
+                    <div class="relative flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-16 mb-6 md:mb-0 md:text-right">
+                            <div class="timeline-dot">1</div>
+                            <h3 class="text-xl font-bold mb-2">تأسیس اسمارت جاب</h3>
+                            <p class="text-gray-600">سا 1401</p>
+                        </div>
+                        <div class="md:w-1/2 md:pl-16">
+                            <div class="bg-gray-50 p-6 rounded-xl">
+                                <p class="text-gray-600">اسمارت جاب در سال 1402 با تیمی 1 نفره در حوزه وب و دیجیتال مارکتینگ فعال شد. اولین پروژه ما طراحی وبسایت برای یک شرکت تولیدی کوچک بود.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline 2 -->
+                    <div class="relative flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-16 mb-6 md:mb-0 order-2 md:order-1">
+                            <div class="bg-gray-50 p-6 rounded-xl">
+                                <p class="text-gray-600">در سال 1402 با اضافه شدن مهارت سئو ، خدمات سئو را به مجموعه خدمات خود اضافه کردیم و اولین پروژه بزرگ خود را برای یک برند معتبر انجام دادیم.</p>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:pl-16 order-1 md:order-2 mb-6 md:mb-0 md:text-left">
+                            <div class="timeline-dot">2</div>
+                            <h3 class="text-xl font-bold mb-2">افزایش خدمات</h3>
+                            <p class="text-gray-600">سال 1402</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline 3 -->
+                    <div class="relative flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-16 mb-6 md:mb-0 md:text-right">
+                            <div class="timeline-dot">3</div>
+                            <h3 class="text-xl font-bold mb-2">توسعه تیم</h3>
+                            <p class="text-gray-600">سال 1403</p>
+                        </div>
+                        <div class="md:w-1/2 md:pl-16">
+                            <div class="bg-gray-50 p-6 rounded-xl">
+                                <p class="text-gray-600">در ادامه سال 1403 مهارت ها افزایش یافت و دفتر کار مستقل خود را افتتاح کردم. در این سال بیش از ۴۰ پروژه موفق را به سرانجام رساندم.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline 4 -->
+                    <div class="relative flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-16 mb-6 md:mb-0 order-2 md:order-1">
+                            <div class="bg-gray-50 p-6 rounded-xl">
+                                <p class="text-gray-600">امروز اسمارت جاب  با تجربه، بیش از 70 پروژه موفق را اجرا کرده و روند رو به رشد خود رو هر روز با قدرت بیشتری ادامه میده.</p>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:pl-16 order-1 md:order-2 mb-6 md:mb-0 md:text-left">
+                            <div class="timeline-dot">4</div>
+                            <h3 class="text-xl font-bold mb-2">امروز</h3>
+                            <p class="text-gray-600">سال 1404</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Team -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">تیم ما</span>
+                <h2 class="text-3xl font-bold mb-4">با تیم متخصص ما آشنا شوید</h2>
+                <p class="text-gray-600">تیم اسمارت جاب متشکل از متخصصان خلاق و با تجربه در حوزه طراحی، توسعه و سئو</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Team 1 -->
+                <div class="team-card bg-white rounded-xl shadow-sm overflow-hidden text-center">
+                    <div class="h-64 overflow-hidden">
+                        <img src="img/S1 (1).png" alt="علی محمدی" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">امیرحسین یوسفی گشتاسب</h3>
+                        <p class="text-purple-600 font-medium mb-3">مدیر و مؤسس</p>
+                        <p class="text-gray-600 text-sm mb-4">با بیش از 3 سال تجربه در طراحی و توسعه وب، امیرحسین تیم اسمارت جاب را هدایت می‌کند.</p>
+                        <!--<div class="flex justify-center space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-purple-600 transition"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-purple-600 transition"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-purple-600 transition"><i class="fab fa-instagram"></i></a>
+                        </div>-->
+                    </div>
+                </div>
+                
+                <!-- Team 2 -->
+                <div class="team-card bg-white rounded-xl shadow-sm overflow-hidden text-center">
+                    <div class="h-64 overflow-hidden">
+                        <img src="img/S1 (2).png" alt="سارا رضایی" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">امیرحسین یوسفی گشتاسب</h3>
+                        <p class="text-purple-600 font-medium mb-3">طراح UI/UX</p>
+                        <p class="text-gray-600 text-sm mb-4">امیرحسین با خلاقیت بی‌نظیرش، تجربه کاربری منحصر به فردی برای مشتریان ما طراحی می‌کند.</p>
+                        <!--<div class="flex justify-center space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-purple-600 transition"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-purple-600 transition"><i class="fab fa-dribbble"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-purple-600 transition"><i class="fab fa-behance"></i></a>
+                        </div>-->
+                    </div>
+                </div>
+                
+                <!-- Team 3 -->
+                <div class="team-card bg-white rounded-xl shadow-sm overflow-hidden text-center">
+                    <div class="h-64 overflow-hidden">
+                        <img src="img/S1 (3).png" alt="رضا کریمی" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">امیرحسین یوسفی گشتاسب</h3>
+                        <p class="text-purple-600 font-medium mb-3">توسعه‌دهنده</p>
+                        <p class="text-gray-600 text-sm mb-4">امیرحسین با مهارت بالا در توسعه وب، ایده‌های طراحی را به واقعیت تبدیل می‌کند.</p>
+                        <!--<div class="flex justify-center space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-purple-600 transition"><i class="fab fa-github"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-purple-600 transition"><i class="fab fa-stack-overflow"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-purple-600 transition"><i class="fab fa-linkedin"></i></a>
+                        </div>-->
+                    </div>
+                </div>
+                
+                <!-- Team 4 -->
+                <div class="team-card bg-white rounded-xl shadow-sm overflow-hidden text-center">
+                    <div class="h-64 overflow-hidden">
+                        <img src="img/S1 (4).png" alt="نازنین احمدی" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">امیرحسین یوسفی گشتاسب</h3>
+                        <p class="text-purple-600 font-medium mb-3">متخصص سئو</p>
+                        <p class="text-gray-600 text-sm mb-4">امیرحسین با استراتژی‌های اثبات شده سئو، وبسایت‌ها را در نتایج گوگل به رتبه‌های برتر می‌رساند.</p>
+                        <!--<div class="flex justify-center space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-purple-600 transition"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-purple-600 transition"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-purple-600 transition"><i class="fab fa-medium"></i></a>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-gray-600 mb-6">به  ما بپیوندید. ما همیشه به دنبال استعدادهای درخشان هستیم.</p>
+                <a href="" class="inline-flex items-center border-2 border-purple-500 hover:bg-purple-500 hover:text-white text-purple-500 font-bold py-3 px-6 rounded-full transition">
+                    مشاهده فرصت‌های شغلی
+                    <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="py-16 gradient-bg text-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl font-bold mb-2">70+</div>
+                    <p class="opacity-90">پروژه موفق</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold mb-2">98%</div>
+                    <p class="opacity-90">رضایت مشتریان</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold mb-2">1</div>
+                    <p class="opacity-90">اعضای تیم</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold mb-2">3</div>
+                    <p class="opacity-90">سال تجربه</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients -->
+	<!--
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">مشتریان ما</span>
+                <h2 class="text-3xl font-bold mb-4">برخی از مشتریان خوشحال ما</h2>
+                <p class="text-gray-600">ما افتخار همکاری با برندهای معتبر و کسب و کارهای موفق را داشته‌ایم</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 items-center">
+                <div class="p-4 flex justify-center">
+                    <img src="img/poster.png">
+                </div>
+                <div class="p-4 flex justify-center">
+                    <img src="img/poster.png">
+                </div>
+                <div class="p-4 flex justify-center">
+                    <img src="img/poster.png">
+                </div>
+                <div class="p-4 flex justify-center">
+                    <img src="img/poster.png">
+                </div>
+                <div class="p-4 flex justify-center">
+                    <img src="img/poster.png">
+                </div>
+                <div class="p-4 flex justify-center">
+                    <img src="img/poster.png">
+                </div>
+                <div class="p-4 flex justify-center">
+                    <img src="img/poster.png">
+                </div>
+                <div class="p-4 flex justify-center">
+                    <img src="img/poster.png">
+                </div>
+                <div class="p-4 flex justify-center">
+                    <img src="img/poster.png">
+                </div>
+                <div class="p-4 flex justify-center">
+                    <img src="img/poster.png">
+                </div>
+            </div>
+        </div>
+    </section>
+-->
+    <!-- CTA -->
+    <section id="contact" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                <div class="flex flex-col lg:flex-row">
+                    <div class="lg:w-1/2 gradient-bg text-white p-12 flex flex-col justify-center">
+                        <h2 class="text-3xl font-bold mb-6">آماده شروع پروژه خود هستید؟</h2>
+                        <p class="opacity-90 mb-8">تیم متخصص اسمارت جاب آماده ارائه مشاوره رایگان و راهکارهای دیجیتال برای رشد کسب و کار شماست.</p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-phone-alt mt-1 ml-4"></i>
+                                <div>
+                                    <h4 class="font-bold mb-1">تماس تلفنی</h4>
+                                    <p>09175913293</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-envelope mt-1 ml-4"></i>
+                                <div>
+                                    <h4 class="font-bold mb-1">ایمیل</h4>
+                                    <p>smartjob.site.seo@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt mt-1 ml-4"></i>
+                                <div>
+                                    <h4 class="font-bold mb-1">آدرس دفتر</h4>
+                                    <p>شیراز</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:w-1/2 p-12">
+                        <h3 class="text-2xl font-bold mb-6">فرم تماس با ما</h3>
+                        <form class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-gray-700 font-medium mb-2">نام و نام خانوادگی</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition input-focus">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-2">ایمیل</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition input-focus">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-gray-700 font-medium mb-2">شماره تماس</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition input-focus">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-gray-700 font-medium mb-2">پیام شما</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition input-focus"></textarea>
+                            </div>
+                            <button type="submit" class="w-full gradient-bg hover:opacity-90 text-white font-bold py-3 px-6 rounded-lg transition shadow-lg hover:shadow-xl">
+                                ارسال پیام
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <!-- About -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-xl">SJ</div>
+                        <span class="mr-2 font-bold text-xl gradient-text">اسمارت جاب</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">ما با ترکیب خلاقیت و تکنولوژی، کسب و کار شما را در دنیای دیجیتال متحول می‌کنیم.</p>
+                    <div class="flex space-x-4 space-x-reverse">
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-purple-600 text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-blue-600 text-white">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-blue-500 text-white">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-red-500 text-white">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">خدمات</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">طراحی سایت اختصاصی</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">فروشگاه اینترنتی</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">سئو و بهینه‌سازی سایت</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">طراحی اپلیکیشن موبایل</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">دیجیتال مارکتینگ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Links -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">لینک‌های مفید</h3>
+                    <ul class="space-y-2">
+                        <li><a href="nemoone.html" class="text-gray-400 hover:text-white transition">نمونه کارها</a></li>
+                        <li><a href="weblog.html" class="text-gray-400 hover:text-white transition">وبلاگ</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition">درباره ما</a></li>
+                        <li><a href="contact us.html" class="text-gray-400 hover:text-white transition">تماس با ما</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">سوالات متداول</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">تماس با ما</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-purple-500 mt-1 ml-2"></i>
+                            <span class="text-gray-400">شیراز</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-purple-500 mt-1 ml-2"></i>
+                            <span class="text-gray-400">09175913293</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-purple-500 mt-1 ml-2"></i>
+                            <span class="text-gray-400">smartjob.site.seo@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">© 1404 اسمارت جاب. تمام حقوق محفوظ است.</p>
+                <div class="flex space-x-6 space-x-reverse">
+                    <a href="#" class="text-gray-500 hover:text-white transition">قوانین و مقررات</a>
+                    <a href="#" class="text-gray-500 hover:text-white transition">حریم خصوصی</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-6 left-6 back-to-top bg-white text-purple-600 p-3 rounded-full shadow-md hidden z-50">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="video-overlay absolute inset-0" id="videoOverlay"></div>
+        <div class="video-container relative w-full max-w-4xl bg-black rounded-xl overflow-hidden">
+            <button id="closeVideo" class="absolute top-4 left-4 z-10 text-white text-2xl hover:text-gray-300 transition">
+                <i class="fas fa-times"></i>
+            </button>
+            <iframe id="videoFrame" class="w-full aspect-video" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+
+        // Back to top button
+        const backToTop = document.getElementById("backToTop");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.remove("hidden");
+            } else {
+                backToTop.classList.add("hidden");
+            }
+        });
+        backToTop.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // Video Modal
+
+        const playButton = document.getElementById('playButton');
+        const videoModal = document.getElementById('videoModal');
+        const videoOverlay = document.getElementById('videoOverlay');
+        const closeVideo = document.getElementById('closeVideo');
+        const videoFrame = document.getElementById('videoFrame');
+        
+        playButton.addEventListener('click', () => {
+            videoFrame.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
+            videoModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeVideo.addEventListener('click', () => {
+            videoModal.classList.remove('open');
+            videoFrame.src = '';
+            document.body.style.overflow = 'auto';
+        });
+        
+        videoOverlay.addEventListener('click', () => {
+            videoModal.classList.remove('open');
+            videoFrame.src = '';
+            document.body.style.overflow = 'auto';
+        });
+    </script>
+</body>
+</html>

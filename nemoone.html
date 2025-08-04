@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نمونه کارها | اسمارت جاب</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --primary: #6e8efb;
+            --secondary: #a777e3;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .portfolio-item {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-left: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .nav-link {
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .filter-btn {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(167, 119, 227, 0.2);
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-color: transparent;
+        }
+        
+        .testimonial-card {
+            background: linear-gradient(135deg, rgba(110, 142, 251, 0.05), rgba(167, 119, 227, 0.05));
+            border: 1px solid rgba(167, 119, 227, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: rgba(167, 119, 227, 0.3);
+        }
+        
+        .client-logo {
+            filter: grayscale(100%) contrast(0.5);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .client-logo:hover {
+            filter: grayscale(0%) contrast(1);
+            opacity: 1;
+        }
+        
+        .hover-effect {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(110, 142, 251, 0.3);
+        }
+        
+        .stats-item {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats-item::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s ease;
+        }
+        
+        .stats-item:hover::before {
+            transform: scaleX(1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-xl">SJ</div>
+                <span class="mr-2 font-bold text-xl gradient-text">اسمارت جاب</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-6 space-x-reverse">
+				<a href="index.html" class="nav-link text-gray-700 hover:text-purple-600 transition">خانه</a>
+                <a href="services.html" class="nav-link text-gray-700 hover:text-purple-600 transition">خدمات</a>
+                <a href="nemoone.html" class="nav-link text-gray-700 hover:text-purple-600 transition">نمونه کارها</a>
+				<a href="features.html" class="nav-link text-gray-700 hover:text-purple-600 transition">ویژگی‌ها</a>
+                <a href="farayand.html" class="nav-link text-gray-700 hover:text-purple-600 transition">فرآیند کار</a>
+                <a href="tarefe.html" class="nav-link text-gray-700 hover:text-purple-600 transition">تعرفه‌ها</a>
+				<a href="about us.html" class="nav-link text-gray-700 hover:text-purple-600 transition">درباره ما</a>
+                <a href="contact us.html" class="nav-link text-gray-700 hover:text-purple-600 transition">تماس با ما</a>
+				<a href="weblog.html" class="nav-link text-gray-700 hover:text-purple-600 transition">وبلاگ ها</a>
+            </div>
+            
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <a href="moshavere.html" class="hidden md:block gradient-bg hover:opacity-90 text-white font-bold py-2 px-4 rounded-full transition text-sm">درخواست مشاوره</a>
+                <button id="mobileMenuButton" class="md:hidden text-gray-700 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 gradient-bg text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==')]"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 flex flex-col items-center text-center relative z-10">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">نمونه کارهای حرفه‌ای ما</h1>
+                <p class="text-xl mb-8 opacity-90">نمونه‌هایی از پروژه‌های موفق ما که با خلاقیت و تخصص اجرا شده‌اند</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#portfolio" class="bg-white text-purple-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-full transition duration-300 text-center shadow-lg hover:shadow-xl">مشاهده نمونه کارها</a>
+                    <a href="contact us.html" class="bg-white text-purple-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-full transition duration-300 text-center shadow-lg hover:shadow-xl">
+                        <i class="fas fa-paper-plane ml-2"></i> شروع پروژه
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-0 left-0 w-full">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#f8fafc" fill-opacity="1" d="M0,160L48,170.7C96,181,192,203,288,202.7C384,203,480,181,576,181.3C672,181,768,203,864,218.7C960,235,1056,245,1152,234.7C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="stats-item bg-gray-50 p-6 rounded-xl text-center hover-effect">
+                    <div class="text-4xl font-bold mb-2 gradient-text">+70</div>
+                    <div class="text-gray-600">پروژه تکمیل شده</div>
+                </div>
+                <div class="stats-item bg-gray-50 p-6 rounded-xl text-center hover-effect">
+                    <div class="text-4xl font-bold mb-2 gradient-text">+70</div>
+                    <div class="text-gray-600">مشتری راضی</div>
+                </div>
+                <div class="stats-item bg-gray-50 p-6 rounded-xl text-center hover-effect">
+                    <div class="text-4xl font-bold mb-2 gradient-text">+50</div>
+                    <div class="text-gray-600">همکاری بلندمدت</div>
+                </div>
+                <div class="stats-item bg-gray-50 p-6 rounded-xl text-center hover-effect">
+                    <div class="text-4xl font-bold mb-2 gradient-text">12</div>
+                    <div class="text-gray-600">جایزه طراحی</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">نمونه کارها</span>
+                <h2 class="text-3xl font-bold mb-4">پروژه‌های برجسته ما</h2>
+                <p class="text-gray-600">نمونه‌هایی از بهترین کارهای ما که با دقت و خلاقیت طراحی و اجرا شده‌اند</p>
+            </div>
+            
+            <!-- Portfolio Filters -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button class="filter-btn active px-4 py-2 rounded-full text-sm font-medium" data-filter="all">همه پروژه‌ها</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium" data-filter="web">طراحی سایت</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium" data-filter="ecommerce">فروشگاه اینترنتی</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium" data-filter="app">اپلیکیشن موبایل</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium" data-filter="branding">برندینگ</button>
+            </div>
+            
+            <!-- Portfolio Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+				
+				<!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/فروشگاه اسباب بازی 1/imgs/فروشگاه اسباب بازی 1.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                  <div class="portfolio-overlay">
+                    <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">فروشگاهی</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                      </div>
+                        <h3 class="text-white text-xl font-bold mb-2">فروشگاه جذاب اسباب بازی</h3>
+                      <p class="text-gray-300 text-sm">طراحی مدرن و حرفه‌ای برای فروشگاه اسباب بازی با ظاهری زیبا</p>
+                      <a href="resume/فروشگاه اسباب بازی 1/index.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                          مشاهده جزئیات
+                          <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                      </a>
+                    </div>
+                </div>
+				
+				<!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/دکوراسیون خانه 1/img/دکوراسیون خانه 1.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                  <div class="portfolio-overlay">
+                    <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">فروشگاهی</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                      </div>
+                        <h3 class="text-white text-xl font-bold mb-2">فروشگاه حرفه ای لوازم دکوراسیون</h3>
+                      <p class="text-gray-300 text-sm">طراحی مدرن و حرفه‌ای برای فروشگاه لوازم دکوراسیون خانه با دسته بندی دقیق برای دسترسی هر به هرچیزی که مشتری شما نیاز دارد</p>
+                      <a href="resume/دکوراسیون خانه 1/home.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                          مشاهده جزئیات
+                          <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                      </a>
+                    </div>
+                </div>
+				
+				<!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/فروشگاه گجت/img/فروشگاه گجت 1.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                  <div class="portfolio-overlay">
+                    <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">فروشگاهی</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                      </div>
+                        <h3 class="text-white text-xl font-bold mb-2">فروشگاه گجت های هوشمند&nbsp;</h3>
+                      <p class="text-gray-300 text-sm">طراحی پیشرفته سایت فروشگاهی گجت های هوشمند با رابط کاربری کاملا شخصی سازی شده</p>
+                      <a href="resume/فروشگاه گجت/index2.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                          مشاهده جزئیات
+                          <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                      </a>
+                    </div>
+                </div>
+				
+				<!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/فروشگاه دوربین مداربسته 1/img/فروشگاه دوربین مداربسته.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                    <div class="portfolio-overlay">
+                      <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">فروشگاهی</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                        </div>
+                        <h3 class="text-white text-xl font-bold mb-2">فروشگاه جذاب دوربین مداربسته&nbsp;</h3>
+                        <p class="text-gray-300 text-sm">طراحی متفاوت فروشگاه دوربین مدار بسته با امکانات کامل</p>
+                        <a href="resume/فروشگاه دوربین مداربسته 1/index.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                            مشاهده جزئیات
+                            <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+				
+				
+				<!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/فروشگاه لباس 11/img/فروشگاه لباس 11.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                  <div class="portfolio-overlay">
+                    <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">فروشگاهی</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                      </div>
+                        <h3 class="text-white text-xl font-bold mb-2">وبسایت ویژه فروشگاه لباس</h3>
+                      <p class="text-gray-300 text-sm">طراحی منحصر به فرد و چشم نواز&nbsp; فروشگاه لباس با دسته بندی دقیق و رابط کاربری جذاب</p>
+                      <a href="resume/فروشگاه لباس 11/lebas.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                          مشاهده جزئیات
+                          <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                      </a>
+                    </div>
+                </div>
+				
+				<!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/فروشگاه لوازم آرایشی 2/img/فروشگاه لوازم آرایشی 2.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                    <div class="portfolio-overlay">
+                        <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">فروشگاهی</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                        </div>
+                        <h3 class="text-white text-xl font-bold mb-2">فروشگاه زیبای لوازم آرایشی</h3>
+                        <p class="text-gray-300 text-sm">طراحی منحصر به فرد و جذاب سایت فروشگاهی لوام آرایشی و بهداشتی با در اخیتار داشتن هر چیزی که لازم است&nbsp;&nbsp;</p>
+                        <a href="resume/فروشگاه لوازم آرایشی 2/index.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                            مشاهده جزئیات
+                            <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+				
+				<!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/کافه 6/img/منو کافه 6.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                    <div class="portfolio-overlay">
+                        <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">منو دیجیتال</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                        </div>
+                        <h3 class="text-white text-xl font-bold mb-2">منو حرفه ای کافه رستوران</h3>
+                        <p class="text-gray-300 text-sm">منو حرفه ای و خلاقانه کافه و رستوران برای به نمایش گذاشتن هر چه بیشتر و بهتر محصولات شما&nbsp;</p>
+                        <a href="resume/کافه 6/ai change.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                            مشاهده جزئیات
+                            <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+				
+				<!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/دفتر حقوقی 2/img/دفتر حقوقی 2.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                  <div class="portfolio-overlay">
+                    <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">فروشگاهی</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                      </div>
+                        <h3 class="text-white text-xl font-bold mb-2">وبسایت حرفه ای دفتر حقوقی</h3>
+                      <p class="text-gray-300 text-sm">طراحی مدرن و حرفه‌ای دفتر حقوقی برای ارائه خدمات گسترده و کاربردی تر</p>
+                    <a href="resume/دفتر حقوقی 2/index.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                          مشاهده جزئیات
+                          <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                      </a>
+                    </div>
+                </div>
+				
+				<!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/لوازم آشپزخانه 1/img/لوازم خانگی 1.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                  <div class="portfolio-overlay">
+                    <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">فروشگاهی</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                      </div>
+                        <h3 class="text-white text-xl font-bold mb-2">فروشگاه جذاب لوازم آشپزخانه</h3>
+                      <p class="text-gray-300 text-sm">طراحی مدرن و حرفه‌ای برای فروشگاه و وبلاگ لوازم خانگی با رابط کاربری زیبا</p>
+                    <a href="resume/لوازم آشپزخانه 1/index.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                          مشاهده جزئیات
+                          <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                      </a>
+                    </div>
+                </div>
+				
+				<!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/فروشگاه لباس 10/img/فروشگاه لباس 10.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                  <div class="portfolio-overlay">
+                    <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">فروشگاهی</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                      </div>
+                        <h3 class="text-white text-xl font-bold mb-2">فروشگاه لباس زیبا و متفاوت</h3>
+                      <p class="text-gray-300 text-sm">طراحی مدرن و حرفه‌ای برای فروشگاه و وبلاگ لباس و مد برای به نمایش گذاشتن هر چه زیبا تر محصولات</p>
+                    <a href="resume/فروشگاه لباس 10/index.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                          مشاهده جزئیات
+                            <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                      </a>
+                    </div>
+                </div>
+				
+				<!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/فروشگاه لوازم آرایشی 3/img/لوازم آرایشی 2.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                  <div class="portfolio-overlay">
+                    <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">فروشگاهی</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                      </div>
+                        <h3 class="text-white text-xl font-bold mb-2">فروشگاه پیشرفته لوازم آرایشی</h3>
+                      <p class="text-gray-300 text-sm">طراحی جذاب و پیشرفته فروشگاه لوازم آرایشی و بهداشتی با رابط کاربری ویژه&nbsp; &nbsp; &nbsp;&nbsp;</p>
+                    <a href="resume/فروشگاه لوازم آرایشی 3/index.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                          مشاهده جزئیات
+                          <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                      </a>
+                    </div>
+                </div>
+		
+                <!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/فروشگاه لباس 1/img/فروشگاه لباس 1.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                    <div class="portfolio-overlay">
+                        <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">فروشگاهی</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                        </div>
+                        <h3 class="text-white text-xl font-bold mb-2">فروشگاه لباس حرفه ای</h3>
+                        <p class="text-gray-300 text-sm">طراحی مدرن و زیبای فروشگاه لباس برای زیبایی و جذابیت هر چه بیشتر کار شما</p>
+                        <a href="resume/باشگاه/gym site.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                            مشاهده جزئیات
+                            <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+				<!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/پورتفولیو 2/img/پورتفولیو 2.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                  <div class="portfolio-overlay">
+                        <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">پورتفولیو</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                        </div>
+                        <h3 class="text-white text-xl font-bold mb-2">وبسایت شخصی (پورتفولیو ) ویژه</h3>
+                      <p class="text-gray-300 text-sm">طراحی پیشرفته و خلاقانه وبسایت شخصی (پورتفولیو) با داشتن تمام امکانات لازم</p>
+                    <a href="resume/پورتفولیو 2/index.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                          مشاهده جزئیات
+                          <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                      </a>
+                    </div>
+                </div>
+				
+				<!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/خدمات فنی/img/خدمات فنی.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                  <div class="portfolio-overlay">
+                        <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">خدماتی</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                        </div>
+                      <h3 class="text-white text-xl font-bold mb-2">سایت فنی مهندسی با طراحی منحصر به فرد و جذاب</h3>
+                      <p class="text-gray-300 text-sm">طراحی مدرن و حرفه‌ای برای شرکت خدماتی فنی مهندسی که تمام خدماتشون رو به بهترین نحوممکن به مشتری هاشون نمایش بدن</p>
+                    <a href="resume/خدمات فنی/hadi.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                          مشاهده جزئیات
+                          <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                      </a>
+                    </div>
+                </div>
+				
+				<!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/فروشگاه اسباب بازی 2/imgs/فروشگاه اسباب بازی 2.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                  <div class="portfolio-overlay">
+                    <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">فروشگاهی</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                      </div>
+                    <h3 class="text-white text-xl font-bold mb-2">وبسایت فروشگاهی حرفه ای اسباب بازی&nbsp;&nbsp;</h3>
+                      <p class="text-gray-300 text-sm">طراحی مدرن و حرفه‌ای برای فروشگاه و وبلاگ لوازم سرگرمی و اسباب بازی</p>
+                    <a href="resume/فروشگاه اسباب بازی 2/index.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                          مشاهده جزئیات
+                          <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                      </a>
+                    </div>
+                </div>
+				
+				<!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/کافه 2/img/منو  کافه 2.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                  <div class="portfolio-overlay">
+                        <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">منودیجیتال</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                        </div>
+                        <h3 class="text-white text-xl font-bold mb-2">منو دیجیتال حرفه ای&nbsp;&nbsp;</h3>
+                      <p class="text-gray-300 text-sm">منو دیجیتال حرفه ای طراخی شده برای کافه ها و رستوران هایی که میخوان خاص بودنشون رو به اوج برسونن</p>
+                    <a href="resume/کافه 2/index.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                          مشاهده جزئیات
+                          <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                      </a>
+                    </div>
+                </div>
+				
+				<!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/کافه 7/img/منو کافه 7.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                  <div class="portfolio-overlay">
+                        <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">منودیجیتال&nbsp;</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                        </div>
+                        <h3 class="text-white text-xl font-bold mb-2">منو دیجیتال ویژه</h3>
+                      <p class="text-gray-300 text-sm">منو دیجیتال با طراحی خاص و کاملا منحصر به فرد</p>
+                    <a href="resume/کافه 7/ds site cafe 2.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                          مشاهده جزئیات
+                          <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                      </a>
+                    </div>
+                </div>
+				
+				<!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/کافه 11/img/منو کافه 11.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                  <div class="portfolio-overlay">
+                      <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">منو دیجیتال</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                        </div>
+                        <h3 class="text-white text-xl font-bold mb-2">منو دیجیتال منحصر به فرد</h3>
+                      <p class="text-gray-300 text-sm">منو دیجیتال با طراحی منحصر به فرد و استثنایی برای زیبا تر شدن هر چه بیشتر کسب و کار حرفه ای شما&nbsp;</p>
+                    <a href="resume/کافه 11/index.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                          مشاهده جزئیات
+                          <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                      </a>
+                    </div>
+                </div>
+				
+				<!-- Project 1 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="resume/باشگاه/img/باشگاه.png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                    <div class="portfolio-overlay">
+                        <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">فروشگاهی</span>
+                            <span class="portfolio-tag">ریسپانسیو</span>
+                        </div>
+                        <h3 class="text-white text-xl font-bold mb-2">وبسایت حرفه ای باشگاه بدنسازی</h3>
+                        <p class="text-gray-300 text-sm">طراحی مدرن و حرفه‌ای برای فروشگاه و وبلاگ بدنسازی</p>
+                        <a href="resume/باشگاه/gym site.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                            مشاهده جزئیات
+                            <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+				
+                <!-- Project 2 -->
+                <div class="portfolio-item group" data-category="ecommerce">
+                    <img src="resume/بیمه 1/img/بیمه 1.png" alt="فروشگاه اینترنتی" class="w-full h-64 object-cover">
+                    <div class="portfolio-overlay">
+                        <div class="flex flex-wrap">
+                            <span class="portfolio-tag">فروشگاه اینترنتی</span>
+                            <span class="portfolio-tag">WooCommerce</span>
+                            <span class="portfolio-tag">درگاه پرداخت</span>
+                        </div>
+                        <h3 class="text-white text-xl font-bold mb-2">سایت حرفه ای کار گزاری بیمه&nbsp;</h3>
+                        <p class="text-gray-300 text-sm">طراحی و توسعه کارگزاری بیمه&nbsp; با امکانات کامل برای معرفی خدمات و ارائه اونها در سریع ترین زمان&nbsp;&nbsp;</p>
+                        <a href="resume/بیمه 1/index.html" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                            مشاهده جزئیات
+                            <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="portfolio-item group" data-category="app">
+                    <img src="resume/بیمه 2/img/بیمه 2.png" alt="اپلیکیشن موبایل" class="w-full h-64 object-cover">
+                    <div class="portfolio-overlay">
+                        <div class="flex flex-wrap">
+                            <span class="portfolio-tag">اپلیکیشن موبایل</span>
+                            <span class="portfolio-tag">Flutter</span>
+                            <span class="portfolio-tag">اندروید و iOS</span>
+                        </div>
+                        <h3 class="text-white text-xl font-bold mb-2">سایت حرفه ای کار گزاری بیمه</h3>
+                        <p class="text-gray-300 text-sm">طراحی و توسعه کارگزاری بیمه با امکانات ویژه و کاملا کاربردی برای حرفه ای تر بودن هر چه بیشتر فرآیند کار&nbsp;</p>
+                        <a href="#" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                            مشاهده جزئیات
+                            <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="portfolio-item group" data-category="branding">
+                    <img src="img/n (11).png" alt="برندینگ" class="w-full h-64 object-cover">
+                    <div class="portfolio-overlay">
+                        <div class="flex flex-wrap">
+                            <span class="portfolio-tag">برندینگ</span>
+                            <span class="portfolio-tag">لوگو</span>
+                            <span class="portfolio-tag">هویت بصری</span>
+                        </div>
+                        <h3 class="text-white text-xl font-bold mb-2">هویت بصری کافه رستوران</h3>
+                        <p class="text-gray-300 text-sm">طراحی لوگو و هویت بصری برای کافه رستوران مدرن</p>
+                        <a href="" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                            مشاهده جزئیات
+                            <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="portfolio-item group" data-category="web">
+                    <img src="img/n (15).png" alt="وبسایت شرکتی" class="w-full h-64 object-cover">
+                    <div class="portfolio-overlay">
+                        <div class="flex flex-wrap">
+                            <span class="portfolio-tag">طراحی سایت</span>
+                            <span class="portfolio-tag">شرکتی</span>
+                            <span class="portfolio-tag">چند زبانه</span>
+                        </div>
+                        <h3 class="text-white text-xl font-bold mb-2">وبسایت شرکت بازرگانی</h3>
+                        <p class="text-gray-300 text-sm">طراحی وبسایت چند زبانه برای شرکت بازرگانی بین‌المللی</p>
+                        <a href="" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                            مشاهده جزئیات
+                            <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="portfolio-item group" data-category="ecommerce">
+                    <img src="img/n (14).png" alt="فروشگاه اینترنتی" class="w-full h-64 object-cover">
+                    <div class="portfolio-overlay">
+                        <div class="flex flex-wrap">
+                            <span class="portfolio-tag">فروشگاه اینترنتی</span>
+                            <span class="portfolio-tag">Shopify</span>
+                            <span class="portfolio-tag">سئو</span>
+                        </div>
+                        <h3 class="text-white text-xl font-bold mb-2">دیجیتال مارکتینگ&nbsp;</h3>
+                        <p class="text-gray-300 text-sm">طراحی و بهینه‌سازی فروشگاه اینترنتی با پلتفرم Shopify</p>
+                        <a href="" class="mt-4 inline-flex items-center text-white hover:text-purple-300 transition">
+                            مشاهده جزئیات
+                            <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center gradient-bg hover:opacity-90 text-white font-bold py-3 px-8 rounded-full transition shadow-lg hover:shadow-xl">
+                    <i class="fas fa-plus ml-2"></i> مشاهده همه پروژه‌ها
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">نظرات مشتریان</span>
+                <h2 class="text-3xl font-bold mb-4">مشتریان ما چه می‌گویند؟</h2>
+                <p class="text-gray-600">نظرات برخی از مشتریان راضی ما که با همکاری ما به اهداف خود رسیده‌اند</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card p-6 rounded-xl hover-effect">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="img/logo.png" alt="مریم محمدی" class="w-full h-full object-cover">
+                        </div>
+                        <div class="mr-3">
+                            <h4 class="font-bold">مریم محمدی</h4>
+                            <span class="text-sm text-gray-500">مدیر عامل شرکت آرمان</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">"طراحی وبسایت جدید شرکت ما توسط تیم اسمارت جاب بسیار حرفه‌ای و دقیق انجام شد. رضایت کامل از نتیجه کار داریم و ترافیک سایت ما 3 برابر شده است."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card p-6 rounded-xl hover-effect">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="img/logo.png" alt="علی رضایی" class="w-full h-full object-cover">
+                        </div>
+                        <div class="mr-3">
+                            <h4 class="font-bold">علی رضایی</h4>
+                            <span class="text-sm text-gray-500">مدیر فروشگاه اینترنتی</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">"فروشگاه اینترنتی ما با بهترین کیفیت توسط این تیم طراحی شد. پشتیبانی عالی و پاسخگویی سریع از مزایای کار با اسمارت جاب است. فروش ما 60% افزایش یافته است."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card p-6 rounded-xl hover-effect">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="img/logo.png" alt="نازنین کریمی" class="w-full h-full object-cover">
+                        </div>
+                        <div class="mr-3">
+                            <h4 class="font-bold">نازنین کریمی</h4>
+                            <span class="text-sm text-gray-500">مدیر مارکتینگ</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">"استراتژی دیجیتال مارکتینگ ارائه شده توسط این تیم بسیار عالی بود. در مدت کوتاهی به نتایج چشمگیری رسیدیم. همکاری با اسمارت جاب را به همه توصیه می‌کنم."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+	<!--
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">مشتریان ما</span>
+                <h2 class="text-3xl font-bold mb-4">شرکت‌هایی که به ما اعتماد کرده‌اند</h2>
+                <p class="text-gray-600">برخی از برندها و شرکت‌هایی که با همکاری ما به اهداف خود رسیده‌اند</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                <div class="flex items-center justify-center p-4">
+                    <img src="img/poster.png">
+                </div>
+                <div class="flex items-center justify-center p-4">
+                    <img src="img/poster.png">
+                </div>
+                <div class="flex items-center justify-center p-4">
+                    <img src="img/poster.png">
+                </div>
+                <div class="flex items-center justify-center p-4">
+                    <img src="img/poster.png">
+                </div>
+                <div class="flex items-center justify-center p-4">
+                    <img src="img/poster.png">
+                </div>
+                <div class="flex items-center justify-center p-4">
+                    <img src="img/poster.png">
+                </div>
+            </div>
+        </div>
+    </section>
+-->
+    <!-- CTA Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-8 md:p-12 text-white">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-2/3 mb-6 md:mb-0">
+                        <h2 class="text-2xl md:text-3xl font-bold mb-4">آماده شروع پروژه خود هستید؟</h2>
+                        <p class="text-lg opacity-90">تیم متخصص ما آماده ارائه مشاوره رایگان و راهکارهای اختصاصی برای کسب و کار شماست</p>
+                    </div>
+                    <div class="md:w-1/3 flex justify-center md:justify-end">
+                        <a href="moshavere.html" class="bg-white text-purple-600 hover:bg-gray-100 font-bold py-3 px-8 rounded-full transition duration-300 text-center shadow-lg hover:shadow-xl whitespace-nowrap">
+                            <i class="fas fa-paper-plane ml-2"></i> درخواست مشاوره
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <!-- About -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-xl">SJ</div>
+                        <span class="mr-2 font-bold text-xl gradient-text">اسمارت جاب</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">ما با ترکیب خلاقیت و تکنولوژی، کسب و کار شما را در دنیای دیجیتال متحول می‌کنیم.</p>
+                    <div class="flex space-x-4 space-x-reverse">
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-purple-600 text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-blue-600 text-white">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-blue-500 text-white">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-red-500 text-white">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">خدمات</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">طراحی سایت اختصاصی</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">فروشگاه اینترنتی</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">سئو و بهینه‌سازی سایت</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">طراحی اپلیکیشن موبایل</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">دیجیتال مارکتینگ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Links -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">لینک‌های مفید</h3>
+                    <ul class="space-y-2">
+                        <li><a href="nemoone.html" class="text-gray-400 hover:text-white transition">نمونه کارها</a></li>
+                        <li><a href="weblog.html" class="text-gray-400 hover:text-white transition">وبلاگ</a></li>
+                        <li><a href="about us.html" class="text-gray-400 hover:text-white transition">درباره ما</a></li>
+                        <li><a href="contact us.html" class="text-gray-400 hover:text-white transition">تماس با ما</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">سوالات متداول</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">تماس با ما</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-purple-500 mt-1 ml-2"></i>
+                            <span class="text-gray-400">شیراز</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-purple-500 mt-1 ml-2"></i>
+                            <span class="text-gray-400">09175913293</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-purple-500 mt-1 ml-2"></i>
+                            <span class="text-gray-400">smartjob.site.seo@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">© 1404 اسمارت جاب. تمام حقوق محفوظ است.</p>
+                <div class="flex space-x-6 space-x-reverse">
+                    <a href="#" class="text-gray-500 hover:text-white transition">قوانین و مقررات</a>
+                    <a href="#" class="text-gray-500 hover:text-white transition">حریم خصوصی</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#" id="backToTop" class="fixed bottom-8 left-8 w-12 h-12 gradient-bg rounded-full flex items-center justify-center text-white shadow-lg back-to-top hidden">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Portfolio Filter
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filterValue = button.getAttribute('data-filter');
+                
+                portfolioItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.remove('hidden');
+            } else {
+                backToTop.classList.add('hidden');
+            }
+        });
+        
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+        
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>	

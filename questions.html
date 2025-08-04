@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سوالات متداول | اسمارت جاب</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --primary: #6e8efb;
+            --secondary: #a777e3;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .faq-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .faq-card:hover {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .faq-toggle {
+            transition: all 0.3s ease;
+        }
+        
+        .faq-toggle.active {
+            background-color: rgba(110, 142, 251, 0.1);
+        }
+        
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-toggle.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        .search-box {
+            box-shadow: 0 4px 15px rgba(110, 142, 251, 0.2);
+        }
+        
+        .category-chip {
+            transition: all 0.3s ease;
+        }
+        
+        .category-chip.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .contact-card {
+            background: linear-gradient(135deg, rgba(110, 142, 251, 0.1), rgba(167, 119, 227, 0.1));
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-xl">SJ</div>
+                <span class="mr-2 font-bold text-xl gradient-text">اسمارت جاب</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-6 space-x-reverse">
+				<a href="index.html" class="nav-link text-gray-700 hover:text-purple-600 transition">خانه</a>
+                <a href="services.html" class="nav-link text-gray-700 hover:text-purple-600 transition">خدمات</a>
+                <a href="nemoone.html" class="nav-link text-gray-700 hover:text-purple-600 transition">نمونه کارها</a>
+				<a href="features.html" class="nav-link text-gray-700 hover:text-purple-600 transition">ویژگی‌ها</a>
+                <a href="farayand.html" class="nav-link text-gray-700 hover:text-purple-600 transition">فرآیند کار</a>
+                <a href="tarefe.html" class="nav-link text-gray-700 hover:text-purple-600 transition">تعرفه‌ها</a>
+				<a href="about us.html" class="nav-link text-gray-700 hover:text-purple-600 transition">درباره ما</a>
+                <a href="contact us.html" class="nav-link text-gray-700 hover:text-purple-600 transition">تماس با ما</a>
+				<a href="weblog.html" class="nav-link text-gray-700 hover:text-purple-600 transition">وبلاگ ها</a>
+            </div>
+            
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <a href="moshavere.html" class="hidden md:block gradient-bg hover:opacity-90 text-white font-bold py-2 px-4 rounded-full transition text-sm">درخواست مشاوره</a>
+                <button id="mobileMenuButton" class="md:hidden text-gray-700 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu bg-white shadow-lg md:hidden">
+            <div class="px-4 py-3 space-y-3">
+                <a href="index.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">خانه</a>
+                <a href="services.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">خدمات</a>
+                <a href="portfolio.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">نمونه کارها</a>
+                <a href="process.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">فرآیند کار</a>
+                <a href="faq.html" class="block py-2 px-4 rounded-lg bg-purple-50 text-purple-600 transition">سوالات متداول</a>
+                <a href="blog.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">وبلاگ</a>
+                <a href="contact.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">تماس با ما</a>
+                <a href="consultation.html" class="block gradient-bg hover:opacity-90 text-white font-bold py-2 px-4 rounded-full transition text-center">درخواست مشاوره</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- FAQ Hero Section -->
+    <section class="pt-32 pb-20 bg-gradient-to-r from-purple-50 to-blue-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">پاسخ به سوالات شما</span>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">سوالات متداول</h1>
+                <p class="text-xl text-gray-600 mb-8">پاسخ به رایج‌ترین سوالات شما درباره خدمات طراحی سایت، سئو و دیجیتال مارکتینگ</p>
+                
+                <!-- Search Box -->
+                <div class="max-w-2xl mx-auto relative">
+                    <input type="text" placeholder="جستجو در سوالات..." class="w-full py-4 px-6 pr-12 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent search-box">
+                    <button class="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-600">
+                        <i class="fas fa-search text-xl"></i>
+                    </button>
+                </div>
+                
+                <!-- Categories -->
+                <div class="flex flex-wrap justify-center gap-3 mt-8">
+                    <button class="category-chip active bg-white px-4 py-2 rounded-full text-sm font-medium">همه دسته‌ها</button>
+                    <button class="category-chip bg-white px-4 py-2 rounded-full text-sm font-medium">طراحی سایت</button>
+                    <button class="category-chip bg-white px-4 py-2 rounded-full text-sm font-medium">سئو و بهینه‌سازی</button>
+                    <button class="category-chip bg-white px-4 py-2 rounded-full text-sm font-medium">فروشگاه اینترنتی</button>
+                    <button class="category-chip bg-white px-4 py-2 rounded-full text-sm font-medium">هزینه‌ها</button>
+                    <button class="category-chip bg-white px-4 py-2 rounded-full text-sm font-medium">پشتیبانی</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Main Content -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <!-- Popular Questions -->
+                <div class="mb-16">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center">
+                        <span class="w-8 h-8 gradient-bg text-white rounded-full flex items-center justify-center ml-2">1</span>
+                        سوالات پرتکرار
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <!-- FAQ Item 1 -->
+                        <div class="faq-card bg-white">
+                            <button class="faq-toggle w-full flex justify-between items-center p-5 text-right">
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 gradient-bg text-white rounded-full flex items-center justify-center text-xs ml-2">1</span>
+                                    <span class="font-semibold">مدت زمان طراحی یک وبسایت چقدر است؟</span>
+                                </div>
+                                <i class="fas fa-chevron-down faq-icon text-purple-500"></i>
+                            </button>
+                            <div class="faq-content px-5">
+                                <div class="pb-5 text-gray-600">
+                                    <p>مدت زمان طراحی وبسایت بستگی به نوع و پیچیدگی پروژه دارد. به طور معمول:</p>
+                                    <ul class="mt-3 space-y-2">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-xs text-purple-500 mt-2 ml-2"></i>
+                                            <span>وبسایت شرکتی ساده: 2 تا 3 هفته</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-xs text-purple-500 mt-2 ml-2"></i>
+                                            <span>وبسایت شرکتی پیشرفته: 4 تا 6 هفته</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-xs text-purple-500 mt-2 ml-2"></i>
+                                            <span>فروشگاه اینترنتی: 6 تا 8 هفته</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-xs text-purple-500 mt-2 ml-2"></i>
+                                            <span>پورتال سازمانی: 8 تا 12 هفته</span>
+                                        </li>
+                                    </ul>
+                                    <p class="mt-3">برای دریافت زمان دقیق برای پروژه خود می‌توانید با ما تماس بگیرید.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 2 -->
+                        <div class="faq-card bg-white">
+                            <button class="faq-toggle w-full flex justify-between items-center p-5 text-right">
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 gradient-bg text-white rounded-full flex items-center justify-center text-xs ml-2">2</span>
+                                    <span class="font-semibold">هزینه طراحی وبسایت چقدر است؟</span>
+                                </div>
+                                <i class="fas fa-chevron-down faq-icon text-purple-500"></i>
+                            </button>
+                            <div class="faq-content px-5">
+                                <div class="pb-5 text-gray-600">
+                                    <p>هزینه طراحی وبسایت بسته به نوع و امکانات مورد نیاز متفاوت است. ما سه پکیج اصلی داریم:</p>
+                                    <ul class="mt-3 space-y-2">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-xs text-purple-500 mt-2 ml-2"></i>
+                                            <span><strong>پکیج پایه:</strong> از ۱۵ میلیون تومان (مناسب برای سایت‌های معرفی ساده)</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-xs text-purple-500 mt-2 ml-2"></i>
+                                            <span><strong>پکیج استاندارد:</strong> از ۳۰ میلیون تومان (مناسب برای سایت‌های شرکتی و خدماتی)</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-xs text-purple-500 mt-2 ml-2"></i>
+                                            <span><strong>پکیج پیشرفته:</strong> از ۶۰ میلیون تومان (مناسب برای فروشگاه‌های اینترنتی و پورتال‌ها)</span>
+                                        </li>
+                                    </ul>
+                                    <p class="mt-3">برای پروژه‌های خاص می‌توانید پیش فاکتور اختصاصی دریافت کنید. هزینه نهایی پس از بررسی دقیق نیازهای شما تعیین می‌شود.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 3 -->
+                        <div class="faq-card bg-white">
+                            <button class="faq-toggle w-full flex justify-between items-center p-5 text-right">
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 gradient-bg text-white rounded-full flex items-center justify-center text-xs ml-2">3</span>
+                                    <span class="font-semibold">آیا وبسایت طراحی شده ریسپانسیو خواهد بود؟</span>
+                                </div>
+                                <i class="fas fa-chevron-down faq-icon text-purple-500"></i>
+                            </button>
+                            <div class="faq-content px-5">
+                                <div class="pb-5 text-gray-600">
+                                    <p>بله، تمام وبسایت‌هایی که ما طراحی می‌کنیم به صورت کاملاً ریسپانسیو هستند و در تمام دستگاه‌ها شامل:</p>
+                                    <ul class="mt-3 space-y-2">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-mobile-alt text-purple-500 ml-2 mt-1"></i>
+                                            <span>موبایل (اندروید و iOS)</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-tablet-alt text-purple-500 ml-2 mt-1"></i>
+                                            <span>تبلت‌ها در اندازه‌های مختلف</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-laptop text-purple-500 ml-2 mt-1"></i>
+                                            <span>لپ‌تاپ‌ها و مانیتورهای معمولی</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-desktop text-purple-500 ml-2 mt-1"></i>
+                                            <span>مانیتورهای بزرگ و wide screen</span>
+                                        </li>
+                                    </ul>
+                                    <p class="mt-3">ما قبل از تحویل پروژه، تست ریسپانسیو را بر روی دستگاه‌های مختلف انجام می‌دهیم.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Design Questions -->
+                <div class="mb-16">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center">
+                        <span class="w-8 h-8 gradient-bg text-white rounded-full flex items-center justify-center ml-2">2</span>
+                        سوالات طراحی سایت
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <!-- FAQ Item 4 -->
+                        <div class="faq-card bg-white">
+                            <button class="faq-toggle w-full flex justify-between items-center p-5 text-right">
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 gradient-bg text-white rounded-full flex items-center justify-center text-xs ml-2">1</span>
+                                    <span class="font-semibold">آیا می‌توانم در فرآیند طراحی مشارکت داشته باشم؟</span>
+                                </div>
+                                <i class="fas fa-chevron-down faq-icon text-purple-500"></i>
+                            </button>
+                            <div class="faq-content px-5">
+                                <div class="pb-5 text-gray-600">
+                                    <p>بله، ما در تمام مراحل طراحی از نظرات و پیشنهادات شما استقبال می‌کنیم. فرآیند کار به این صورت است:</p>
+                                    <ul class="mt-3 space-y-2">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-purple-500 ml-2 mt-1"></i>
+                                            <span>جلسه مشاوره اولیه برای درک نیازها و سلیقه شما</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-purple-500 ml-2 mt-1"></i>
+                                            <span>ارسال طرح اولیه (وایرفریم) برای تایید شما</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-purple-500 ml-2 mt-1"></i>
+                                            <span>طراحی UI و دریافت بازخورد</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-purple-500 ml-2 mt-1"></i>
+                                            <span>پیاده‌سازی و امکان تست نسخه دمو</span>
+                                        </li>
+                                    </ul>
+                                    <p class="mt-3">شما می‌توانید در هر مرحله نظرات خود را بیان کنید و ما تا 3 بار اصلاحات اساسی را انجام می‌دهیم.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 5 -->
+                        <div class="faq-card bg-white">
+                            <button class="faq-toggle w-full flex justify-between items-center p-5 text-right">
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 gradient-bg text-white rounded-full flex items-center justify-center text-xs ml-2">2</span>
+                                    <span class="font-semibold">از چه تکنولوژی‌هایی برای طراحی سایت استفاده می‌کنید؟</span>
+                                </div>
+                                <i class="fas fa-chevron-down faq-icon text-purple-500"></i>
+                            </button>
+                            <div class="faq-content px-5">
+                                <div class="pb-5 text-gray-600">
+                                    <p>ما از جدیدترین و بهترین تکنولوژی‌های روز دنیا استفاده می‌کنیم:</p>
+                                    <div class="mt-4 grid md:grid-cols-2 gap-4">
+                                        <div class="bg-gray-50 p-4 rounded-lg">
+                                            <h4 class="font-bold text-purple-600 mb-2">Front-end:</h4>
+                                            <ul class="space-y-2">
+                                                <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> HTML5, CSS3</li>
+                                                <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> JavaScript (ES6+)</li>
+                                                <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> React.js / Vue.js</li>
+                                                <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> Tailwind CSS</li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-gray-50 p-4 rounded-lg">
+                                            <h4 class="font-bold text-purple-600 mb-2">Back-end:</h4>
+                                            <ul class="space-y-2">
+                                                <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> Node.js</li>
+                                                <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> PHP (Laravel)</li>
+                                                <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> Python (Django)</li>
+                                                <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> MySQL, MongoDB</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <p class="mt-4">تکنولوژی دقیق بر اساس نیازهای پروژه شما انتخاب می‌شود.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 6 -->
+                        <div class="faq-card bg-white">
+                            <button class="faq-toggle w-full flex justify-between items-center p-5 text-right">
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 gradient-bg text-white rounded-full flex items-center justify-center text-xs ml-2">3</span>
+                                    <span class="font-semibold">آیا محتوای سایت را هم شما تولید می‌کنید؟</span>
+                                </div>
+                                <i class="fas fa-chevron-down faq-icon text-purple-500"></i>
+                            </button>
+                            <div class="faq-content px-5">
+                                <div class="pb-5 text-gray-600">
+                                    <p>بله، ما خدمات تولید محتوا را نیز ارائه می‌دهیم که شامل موارد زیر است:</p>
+                                    <ul class="mt-3 space-y-2">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-pen-fancy text-purple-500 ml-2 mt-1"></i>
+                                            <span><strong>تولید محتوای متنی:</strong> مقالات تخصصی، معرفی محصولات، صفحات درباره ما و...</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-camera text-purple-500 ml-2 mt-1"></i>
+                                            <span><strong>تولید محتوای تصویری:</strong> عکاسی حرفه‌ای، طراحی اینفوگرافیک، بنرهای تبلیغاتی</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-video text-purple-500 ml-2 mt-1"></i>
+                                            <span><strong>تولید محتوای ویدیویی:</strong> تیزرهای تبلیغاتی، ویدیوهای معرفی محصول</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-search text-purple-500 ml-2 mt-1"></i>
+                                            <span><strong>محتوا برای سئو:</strong> تولید محتوای بهینه‌شده برای موتورهای جستجو</span>
+                                        </li>
+                                    </ul>
+                                    <p class="mt-3">همچنین می‌توانید محتوای سایت را خودتان تهیه کنید و ما فقط آن را در سایت قرار می‌دهیم.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SEO Questions -->
+                <div class="mb-16">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center">
+                        <span class="w-8 h-8 gradient-bg text-white rounded-full flex items-center justify-center ml-2">3</span>
+                        سوالات سئو و بهینه‌سازی
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <!-- FAQ Item 7 -->
+                        <div class="faq-card bg-white">
+                            <button class="faq-toggle w-full flex justify-between items-center p-5 text-right">
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 gradient-bg text-white rounded-full flex items-center justify-center text-xs ml-2">1</span>
+                                    <span class="font-semibold">آیا سئو سایت هم انجام می‌دهید؟</span>
+                                </div>
+                                <i class="fas fa-chevron-down faq-icon text-purple-500"></i>
+                            </button>
+                            <div class="faq-content px-5">
+                                <div class="pb-5 text-gray-600">
+                                    <p>بله، ما خدمات سئو را به صورت تخصصی ارائه می‌دهیم که شامل سه بخش اصلی است:</p>
+                                    <div class="mt-4 grid md:grid-cols-3 gap-4">
+                                        <div class="bg-gray-50 p-4 rounded-lg">
+                                            <h4 class="font-bold text-purple-600 mb-2">سئو تکنیکال</h4>
+                                            <ul class="space-y-2 text-sm">
+                                                <li class="flex items-start"><i class="fas fa-check text-purple-500 ml-2 mt-1"></i> بهینه‌سازی سرعت سایت</li>
+                                                <li class="flex items-start"><i class="fas fa-check text-purple-500 ml-2 mt-1"></i> ساختار مناسب URL</li>
+                                                <li class="flex items-start"><i class="fas fa-check text-purple-500 ml-2 mt-1"></i> پیاده‌سازی Schema Markup</li>
+                                                <li class="flex items-start"><i class="fas fa-check text-purple-500 ml-2 mt-1"></i> بهینه‌سازی برای موبایل</li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-gray-50 p-4 rounded-lg">
+                                            <h4 class="font-bold text-purple-600 mb-2">سئو محتوایی</h4>
+                                            <ul class="space-y-2 text-sm">
+                                                <li class="flex items-start"><i class="fas fa-check text-purple-500 ml-2 mt-1"></i> تحقیق کلمات کلیدی</li>
+                                                <li class="flex items-start"><i class="fas fa-check text-purple-500 ml-2 mt-1"></i> تولید محتوای بهینه</li>
+                                                <li class="flex items-start"><i class="fas fa-check text-purple-500 ml-2 mt-1"></i> بهینه‌سازی متا تگ‌ها</li>
+                                                <li class="flex items-start"><i class="fas fa-check text-purple-500 ml-2 mt-1"></i> لینک‌دهی داخلی</li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-gray-50 p-4 rounded-lg">
+                                            <h4 class="font-bold text-purple-600 mb-2">سئو خارجی</h4>
+                                            <ul class="space-y-2 text-sm">
+                                                <li class="flex items-start"><i class="fas fa-check text-purple-500 ml-2 mt-1"></i> لینک‌سازی خارجی</li>
+                                                <li class="flex items-start"><i class="fas fa-check text-purple-500 ml-2 mt-1"></i> فعالیت در شبکه‌های اجتماعی</li>
+                                                <li class="flex items-start"><i class="fas fa-check text-purple-500 ml-2 mt-1"></i> ثبت در دایرکتوری‌ها</li>
+                                                <li class="flex items-start"><i class="fas fa-check text-purple-500 ml-2 mt-1"></i> مدیریت برندینگ</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <p class="mt-4">در پکیج‌های استاندارد و پیشرفته طراحی سایت، سئو اولیه نیز انجام می‌شود.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 8 -->
+                        <div class="faq-card bg-white">
+                            <button class="faq-toggle w-full flex justify-between items-center p-5 text-right">
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 gradient-bg text-white rounded-full flex items-center justify-center text-xs ml-2">2</span>
+                                    <span class="font-semibold">چقدر طول می‌کشد تا در گوگل رتبه بگیریم؟</span>
+                                </div>
+                                <i class="fas fa-chevron-down faq-icon text-purple-500"></i>
+                            </button>
+                            <div class="faq-content px-5">
+                                <div class="pb-5 text-gray-600">
+                                    <p>مدت زمان دیده شدن نتایج سئو بستگی به عوامل مختلفی دارد:</p>
+                                    <ul class="mt-3 space-y-2">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-xs text-purple-500 ml-2 mt-2"></i>
+                                            <span><strong>رقابت در کلمات کلیدی:</strong> برای کلمات کم‌رقابت 1-3 ماه، برای کلمات پررقابت 6-12 ماه</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-xs text-purple-500 ml-2 mt-2"></i>
+                                            <span><strong>کیفیت سایت:</strong> هرچه ساختار سایت بهتر باشد، نتایج سریع‌تر دیده می‌شود</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-xs text-purple-500 ml-2 mt-2"></i>
+                                            <span><strong>میزان فعالیت:</strong> تولید محتوای منظم و فعالیت مستمر تأثیر مستقیم دارد</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-xs text-purple-500 ml-2 mt-2"></i>
+                                            <span><strong>سابقه دامنه:</strong> دامنه‌های جدیدتر معمولاً به زمان بیشتری نیاز دارند</span>
+                                        </li>
+                                    </ul>
+                                    <p class="mt-3">به طور متوسط، پس از 3-6 ماه می‌توانید پیشرفت را در رتبه‌بندی مشاهده کنید.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Support Questions -->
+                <div>
+                    <h2 class="text-2xl font-bold mb-6 flex items-center">
+                        <span class="w-8 h-8 gradient-bg text-white rounded-full flex items-center justify-center ml-2">4</span>
+                        سوالات پشتیبانی
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <!-- FAQ Item 9 -->
+                        <div class="faq-card bg-white">
+                            <button class="faq-toggle w-full flex justify-between items-center p-5 text-right">
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 gradient-bg text-white rounded-full flex items-center justify-center text-xs ml-2">1</span>
+                                    <span class="font-semibold">آیا بعد از تحویل پروژه پشتیبانی دارید؟</span>
+                                </div>
+                                <i class="fas fa-chevron-down faq-icon text-purple-500"></i>
+                            </button>
+                            <div class="faq-content px-5">
+                                <div class="pb-5 text-gray-600">
+                                    <p>بله، سیاست پشتیبانی ما به این صورت است:</p>
+                                    <ul class="mt-3 space-y-2">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-purple-500 ml-2 mt-1"></i>
+                                            <span><strong>6 ماه پشتیبانی رایگان:</strong> شامل رفع خطاها و باگ‌ها، بروزرسانی‌های جزئی و پاسخ به سوالات فنی</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-purple-500 ml-2 mt-1"></i>
+                                            <span><strong>پشتیبانی سالانه:</strong> پس از 6 ماه می‌توانید بسته‌های پشتیبانی سالانه را خریداری کنید</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-purple-500 ml-2 mt-1"></i>
+                                            <span><strong>پشتیبانی اضطراری:</strong> در صورت نیاز به پشتیبانی فوری خارج از ساعت اداری</span>
+                                        </li>
+                                    </ul>
+                                    <p class="mt-3">همچنین برای مشتریانی که بسته‌های پشتیبانی سالانه را خریداری می‌کنند، تخفیف‌های ویژه در نظر گرفته شده است.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 10 -->
+                        <div class="faq-card bg-white">
+                            <button class="faq-toggle w-full flex justify-between items-center p-5 text-right">
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 gradient-bg text-white rounded-full flex items-center justify-center text-xs ml-2">2</span>
+                                    <span class="font-semibold">چگونه می‌توانم درخواست پشتیبانی ثبت کنم؟</span>
+                                </div>
+                                <i class="fas fa-chevron-down faq-icon text-purple-500"></i>
+                            </button>
+                            <div class="faq-content px-5">
+                                <div class="pb-5 text-gray-600">
+                                    <p>شما از چند روش می‌توانید درخواست پشتیبانی ثبت کنید:</p>
+                                    <div class="mt-4 grid md:grid-cols-2 gap-4">
+                                        <div class="bg-gray-50 p-4 rounded-lg">
+                                            <h4 class="font-bold text-purple-600 mb-2">پشتیبانی آنلاین</h4>
+                                            <ul class="space-y-2">
+                                                <li class="flex items-center">
+                                                    <i class="fas fa-headset text-purple-500 ml-2"></i>
+                                                    <span class="mr-2">چت آنلاین سایت (24/7)</span>
+                                                </li>
+                                                <li class="flex items-center">
+                                                    <i class="fas fa-ticket-alt text-purple-500 ml-2"></i>
+                                                    <span class="mr-2">تیکت پشتیبانی در پنل کاربری</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-gray-50 p-4 rounded-lg">
+                                            <h4 class="font-bold text-purple-600 mb-2">پشتیبانی تلفنی و حضوری</h4>
+                                            <ul class="space-y-2">
+                                                <li class="flex items-center">
+                                                    <i class="fas fa-phone text-purple-500 ml-2"></i>
+                                                    <span class="mr-2">تماس با شماره 021-12345678</span>
+                                                </li>
+                                                <li class="flex items-center">
+                                                    <i class="fas fa-map-marker-alt text-purple-500 ml-2"></i>
+                                                    <span class="mr-2">مراجعه به دفتر شرکت</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <p class="mt-4">پاسخ به درخواست‌های پشتیبانی معمولاً در کمتر از 4 ساعت کاری انجام می‌شود.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="py-16 bg-gradient-to-r from-purple-50 to-blue-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2 p-8 md:p-12">
+                        <h2 class="text-2xl font-bold mb-4">هنوز پاسخ سوال خود را پیدا نکردید؟</h2>
+                        <p class="text-gray-600 mb-6">تیم پشتیبانی ما آماده پاسخگویی به سوالات شماست. کافیست فرم مقابل را پر کنید یا با ما تماس بگیرید.</p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 gradient-bg text-white rounded-full flex items-center justify-center ml-3">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-sm">شماره تماس</p>
+                                    <p class="font-bold">09175913293</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 gradient-bg text-white rounded-full flex items-center justify-center ml-3">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-sm">ایمیل پشتیبانی</p>
+                                    <p class="font-bold">smartjob.site.seo@gmail.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 gradient-bg text-white rounded-full flex items-center justify-center ml-3">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-sm">ساعات پاسخگویی</p>
+                                    <p class="font-bold">شنبه تا پنجشنبه: 9 صبح تا 12 شب</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 bg-gray-50 p-8 md:p-12">
+                        <h3 class="text-xl font-bold mb-6">فرم تماس با پشتیبانی</h3>
+                        <form>
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 mb-2">نام و نام خانوادگی</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 mb-2">ایمیل</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="subject" class="block text-gray-700 mb-2">موضوع</label>
+                                <select id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                                    <option>انتخاب موضوع</option>
+                                    <option>پرسش درباره خدمات</option>
+                                    <option>مشکل فنی</option>
+                                    <option>پیشنهادات و انتقادات</option>
+                                    <option>سایر موارد</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="message" class="block text-gray-700 mb-2">متن پیام</label>
+                                <textarea id="message" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full gradient-bg hover:opacity-90 text-white font-bold py-3 px-6 rounded-full transition shadow-lg hover:shadow-xl">
+                                ارسال پیام
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <!-- About -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-xl">SJ</div>
+                        <span class="mr-2 font-bold text-xl gradient-text">اسمارت جاب</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">ما با ترکیب خلاقیت و تکنولوژی، کسب و کار شما را در دنیای دیجیتال متحول می‌کنیم.</p>
+                    <div class="flex space-x-4 space-x-reverse">
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-purple-600 text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-blue-600 text-white">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-blue-500 text-white">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-red-500 text-white">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">خدمات</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">طراحی سایت اختصاصی</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">فروشگاه اینترنتی</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">سئو و بهینه‌سازی سایت</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">طراحی اپلیکیشن موبایل</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">دیجیتال مارکتینگ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Links -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">لینک‌های مفید</h3>
+                    <ul class="space-y-2">
+                        <li><a href="nemoone.html" class="text-gray-400 hover:text-white transition">نمونه کارها</a></li>
+                        <li><a href="weblog.html" class="text-gray-400 hover:text-white transition">وبلاگ</a></li>
+                        <li><a href="about us.html" class="text-gray-400 hover:text-white transition">درباره ما</a></li>
+                        <li><a href="contact us.html" class="text-gray-400 hover:text-white transition">تماس با ما</a></li>
+                        <li><a href="questions.html" class="text-gray-400 hover:text-white transition">سوالات متداول</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">تماس با ما</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-purple-500 mt-1 ml-2"></i>
+                            <span class="text-gray-400">شیراز</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-purple-500 mt-1 ml-2"></i>
+                            <span class="text-gray-400">09175913293&nbsp;</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-purple-500 mt-1 ml-2"></i>
+                            <span class="text-gray-400">smartjob.site.seo@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">© 1404 اسمارت جاب. تمام حقوق محفوظ است.</p>
+                <div class="flex space-x-6 space-x-reverse">
+                    <a href="#" class="text-gray-500 hover:text-white transition">قوانین و مقررات</a>
+                    <a href="#" class="text-gray-500 hover:text-white transition">حریم خصوصی</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-6 left-6 back-to-top bg-white text-purple-600 p-3 rounded-full shadow-md hidden z-50">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script>
+        // Back to top button
+        const backToTop = document.getElementById("backToTop");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.remove("hidden");
+            } else {
+                backToTop.classList.add("hidden");
+            }
+        });
+        backToTop.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById("mobileMenuButton");
+        const mobileMenu = document.getElementById("mobileMenu");
+        mobileMenuButton.addEventListener("click", () => {
+            mobileMenu.classList.toggle("open");
+        });
+
+        // FAQ Toggle
+        const faqToggles = document.querySelectorAll(".faq-toggle");
+        faqToggles.forEach(toggle => {
+            toggle.addEventListener("click", () => {
+                const card = toggle.closest(".faq-card");
+                const content = toggle.nextElementSibling;
+                
+                // Close all other FAQs
+                document.querySelectorAll(".faq-card").forEach(item => {
+                    if (item !== card) {
+                        item.querySelector(".faq-toggle").classList.remove("active");
+                        item.querySelector(".faq-content").style.maxHeight = null;
+                    }
+                });
+                
+                // Toggle current FAQ
+                toggle.classList.toggle("active");
+                if (toggle.classList.contains("active")) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } else {
+                    content.style.maxHeight = null;
+                }
+            });
+        });
+
+        // Category chips
+        const categoryChips = document.querySelectorAll(".category-chip");
+        categoryChips.forEach(chip => {
+            chip.addEventListener("click", () => {
+                categoryChips.forEach(c => c.classList.remove("active"));
+                chip.classList.add("active");
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector("input[type='text']");
+        searchInput.addEventListener("input", (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const faqItems = document.querySelectorAll(".faq-card");
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector(".font-semibold").textContent.toLowerCase();
+                const answer = item.querySelector(".faq-content").textContent.toLowerCase();
+                
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

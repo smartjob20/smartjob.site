@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درخواست مشاوره | اسمارت جاب</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --primary: #6e8efb;
+            --secondary: #a777e3;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .input-focus:focus {
+            box-shadow: 0 0 0 3px rgba(167, 119, 227, 0.3);
+            border-color: var(--secondary);
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .consultation-card {
+            box-shadow: 0 20px 25px -5px rgba(110, 142, 251, 0.1), 0 10px 10px -5px rgba(110, 142, 251, 0.04);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .consultation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px -12px rgba(110, 142, 251, 0.25);
+        }
+        
+        .service-option input:checked + label {
+            border-color: var(--primary);
+            background-color: rgba(110, 142, 251, 0.05);
+        }
+        
+        .timeline-step {
+            position: relative;
+        }
+        
+        .timeline-step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 24px;
+            right: -24px;
+            width: 48px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .timeline-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 0 0 4px rgba(110, 142, 251, 0.2);
+        }
+        
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            top: -150px;
+            right: -150px;
+        }
+        
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--secondary);
+            bottom: -200px;
+            left: -200px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-xl">SJ</div>
+                <span class="mr-2 font-bold text-xl gradient-text">اسمارت جاب</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-6 space-x-reverse">
+				<a href="index.html" class="nav-link text-gray-700 hover:text-purple-600 transition">خانه</a>
+                <a href="services.html" class="nav-link text-gray-700 hover:text-purple-600 transition">خدمات</a>
+                <a href="nemoone.html" class="nav-link text-gray-700 hover:text-purple-600 transition">نمونه کارها</a>
+				<a href="features.html" class="nav-link text-gray-700 hover:text-purple-600 transition">ویژگی‌ها</a>
+                <a href="farayand.html" class="nav-link text-gray-700 hover:text-purple-600 transition">فرآیند کار</a>
+                <a href="tarefe.html" class="nav-link text-gray-700 hover:text-purple-600 transition">تعرفه‌ها</a>
+				<a href="about us.html" class="nav-link text-gray-700 hover:text-purple-600 transition">درباره ما</a>
+                <a href="contact us.html" class="nav-link text-gray-700 hover:text-purple-600 transition">تماس با ما</a>
+				<a href="weblog.html" class="nav-link text-gray-700 hover:text-purple-600 transition">وبلاگ ها</a>
+            </div>
+            
+            <a href="moshavere.html" class="hidden md:flex items-center gradient-bg hover:opacity-90 text-white font-bold py-2 px-4 rounded-full transition text-sm">
+                <i class="fas fa-phone ml-2"></i>
+                درخواست مشاوره
+            </a>
+            
+            <button id="mobileMenuButton" class="md:hidden text-gray-700 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu bg-white shadow-lg md:hidden">
+            <div class="px-4 py-3 space-y-3">
+                <a href="index.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">خانه</a>
+                <a href="index.html#services" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">خدمات</a>
+                <a href="index.html#portfolio" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">نمونه کارها</a>
+                <a href="consultation.html" class="block py-2 px-4 rounded-lg bg-purple-50 text-purple-600 font-bold transition">درخواست مشاوره</a>
+                <a href="tel:+982122345678" class="block gradient-bg hover:opacity-90 text-white font-bold py-2 px-4 rounded-full transition text-center">
+                    <i class="fas fa-phone ml-2"></i>
+                    تماس با ما
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Consultation Hero -->
+    <section class="pt-32 pb-20 relative overflow-hidden">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">مشاوره رایگان طراحی سایت و سئو</h1>
+                <p class="text-xl text-gray-600 mb-8">فرم زیر را پر کنید تا کارشناسان ما در کمتر از 24 ساعت با شما تماس بگیرند و راهکارهای تخصصی را ارائه دهند.</p>
+                
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <div class="flex items-center bg-white rounded-full px-4 py-2 shadow-sm">
+                        <div class="w-8 h-8 rounded-full gradient-bg flex items-center justify-center text-white mr-2" style="margin-left: 10px">
+                            <i class="fas fa-check text-sm"></i>
+                        </div>
+                        <span class="font-medium">مشاوره رایگان</span>
+                    </div>
+                    <div class="flex items-center bg-white rounded-full px-4 py-2 shadow-sm">
+                        <div class="w-8 h-8 rounded-full gradient-bg flex items-center justify-center text-white mr-2" style="margin-left: 10px">
+                            <i class="fas fa-check text-sm"></i>
+                        </div>
+                        <span class="font-medium">پاسخگویی 24 ساعته</span>
+                    </div>
+                    <div class="flex items-center bg-white rounded-full px-4 py-2 shadow-sm">
+                        <div class="w-8 h-8 rounded-full gradient-bg flex items-center justify-center text-white mr-2" style="margin-left: 10px">
+                            <i class="fas fa-check text-sm"></i>
+                        </div>
+                        <span class="font-medium">پیش فاکتور اختصاصی</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<br>
+    <!-- Consultation Form -->
+    <section class="pb-20 relative">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="consultation-card bg-white rounded-2xl overflow-hidden relative z-10">
+                    <div class="grid md:grid-cols-2 gap-0">
+                        <!-- Form Side -->
+                        <div class="p-8 md:p-10">
+                            <h2 class="text-2xl font-bold mb-6">فرم درخواست مشاوره</h2>
+                            
+                            <form id="consultationForm" class="space-y-6">
+                                <div>
+                                    <label for="name" class="block text-gray-700 font-medium mb-2">نام و نام خانوادگی *</label>
+                                    <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition" placeholder="نام خود را وارد کنید">
+                                </div>
+                                
+                                <div>
+                                    <label for="phone" class="block text-gray-700 font-medium mb-2">شماره تماس *</label>
+                                    <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition" placeholder="09123456789">
+                                </div>
+                                
+                                <div>
+                                    <label for="email" class="block text-gray-700 font-medium mb-2">ایمیل (اختیاری)</label>
+                                    <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition" placeholder="email@example.com">
+                                </div>
+                                
+                                <div>
+                                    <label for="business" class="block text-gray-700 font-medium mb-2">حوزه فعالیت کسب و کار *</label>
+                                    <input type="text" id="business" name="business" required class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition" placeholder="مثال: فروشگاه پوشاک">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-3">خدمات مورد نیاز *</label>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div class="service-option">
+                                            <input type="checkbox" id="service1" name="services" value="طراحی سایت" class="hidden">
+                                            <label for="service1" class="block border border-gray-300 rounded-lg p-3 text-center cursor-pointer transition hover:border-purple-400">
+                                                <i class="fas fa-laptop-code text-purple-500 text-xl mb-2"></i>
+                                                <span>طراحی سایت</span>
+                                            </label>
+                                        </div>
+                                        <div class="service-option">
+                                            <input type="checkbox" id="service2" name="services" value="فروشگاه اینترنتی" class="hidden">
+                                            <label for="service2" class="block border border-gray-300 rounded-lg p-3 text-center cursor-pointer transition hover:border-purple-400">
+                                                <i class="fas fa-store text-purple-500 text-xl mb-2"></i>
+                                                <span>فروشگاه اینترنتی</span>
+                                            </label>
+                                        </div>
+                                        <div class="service-option">
+                                            <input type="checkbox" id="service3" name="services" value="سئو سایت" class="hidden">
+                                            <label for="service3" class="block border border-gray-300 rounded-lg p-3 text-center cursor-pointer transition hover:border-purple-400">
+                                                <i class="fas fa-search text-purple-500 text-xl mb-2"></i>
+                                                <span>سئو سایت</span>
+                                            </label>
+                                        </div>
+                                        <div class="service-option">
+                                            <input type="checkbox" id="service4" name="services" value="اپلیکیشن موبایل" class="hidden">
+                                            <label for="service4" class="block border border-gray-300 rounded-lg p-3 text-center cursor-pointer transition hover:border-purple-400">
+                                                <i class="fas fa-mobile-alt text-purple-500 text-xl mb-2"></i>
+                                                <span>اپلیکیشن موبایل</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label for="budget" class="block text-gray-700 font-medium mb-2">بودجه پیش‌بینی شده (اختیاری)</label>
+                                    <select id="budget" name="budget" class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition">
+                                        <option value="">بودجه خود را انتخاب کنید</option>
+                                        <option value="5-15">5 تا 15 میلیون تومان</option>
+                                        <option value="15-30">15 تا 30 میلیون تومان</option>
+                                        <option value="30-50">30 تا 50 میلیون تومان</option>
+                                        <option value="50+">بیش از 50 میلیون تومان</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label for="details" class="block text-gray-700 font-medium mb-2">توضیحات بیشتر (اختیاری)</label>
+                                    <textarea id="details" name="details" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition" placeholder="در صورت نیاز توضیحات بیشتری بنویسید..."></textarea>
+                                </div>
+                                
+                                <button type="submit" class="w-full gradient-bg hover:opacity-90 text-white font-bold py-4 px-6 rounded-full transition shadow-lg hover:shadow-xl">
+                                    ارسال درخواست مشاوره
+                                    <i class="fas fa-paper-plane mr-2"></i>
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <!-- Info Side -->
+                        <div class="gradient-bg text-white p-8 md:p-10 flex flex-col">
+                            <div class="mb-8">
+                                <h3 class="text-xl font-bold mb-4">چرا مشاوره رایگان؟</h3>
+                                <p class="mb-4 opacity-90">کارشناسان ما پس از بررسی نیازهای شما، بهترین راهکارهای فنی و اقتصادی را ارائه می‌دهند.</p>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-white/80 ml-2 mt-1"></i>
+                                        <span>تحلیل دقیق نیازهای کسب و کار شما</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-white/80 ml-2 mt-1"></i>
+                                        <span>پیشنهاد بهترین تکنولوژی‌های روز</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-white/80 ml-2 mt-1"></i>
+                                        <span>برآورد هزینه دقیق و منصفانه</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-white/80 ml-2 mt-1"></i>
+                                        <span>زمانبندی اجرای پروژه</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="mt-auto">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-xl mr-3">
+                                        <i class="fas fa-headset"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">پشتیبانی تلفنی</h4>
+                                        <p class="text-sm opacity-80">شنبه تا پنجشنبه، 9 صبح تا 12 شب</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-xl mr-3">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">ایمیل</h4>
+                                        <p class="text-sm opacity-80">smartjob.site.seo</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Timeline -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold mb-4">فرآیند مشاوره و همکاری</h2>
+                <p class="text-gray-600">پس از ارسال فرم، این مراحل را با هم طی خواهیم کرد</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-4 gap-8 text-center">
+                    <div class="timeline-step">
+                        <div class="timeline-dot mx-auto mb-4">1</div>
+                        <h3 class="font-bold mb-2">ارسال درخواست</h3>
+                        <p class="text-gray-600 text-sm">فرم مشاوره را پر کنید و اطلاعات کسب و کار خود را با ما در میان بگذارید.</p>
+                    </div>
+                    
+                    <div class="timeline-step">
+                        <div class="timeline-dot mx-auto mb-4">2</div>
+                        <h3 class="font-bold mb-2">تماس کارشناس</h3>
+                        <p class="text-gray-600 text-sm">کارشناسان ما در کمتر از 24 ساعت با شما تماس خواهند گرفت.</p>
+                    </div>
+                    
+                    <div class="timeline-step">
+                        <div class="timeline-dot mx-auto mb-4">3</div>
+                        <h3 class="font-bold mb-2">مشاوره تخصصی</h3>
+                        <p class="text-gray-600 text-sm">جلسه مشاوره رایگان برای بررسی دقیق نیازهای شما برگزار می‌شود.</p>
+                    </div>
+                    
+                    <div class="timeline-step">
+                        <div class="timeline-dot mx-auto mb-4">4</div>
+                        <h3 class="font-bold mb-2">پیشنهاد و عقد قرارداد</h3>
+                        <p class="text-gray-600 text-sm">پس از توافق، پیش فاکتور و قرارداد نهایی تنظیم می‌شود.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 gradient-bg text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">آماده شروع پروژه خود هستید؟</h2>
+            <p class="text-xl opacity-90 mb-8 max-w-2xl mx-auto">همین حالا فرم مشاوره را پر کنید یا با شماره زیر تماس بگیرید تا راهنمایی شوید.</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="moshavere.html" class="bg-white text-purple-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-full transition duration-300 shadow-lg hover:shadow-xl">
+                    پر کردن فرم مشاوره
+                </a>
+                <a href="tel:+989175913293" class="border-2 border-white hover:bg-white hover:bg-opacity-10 font-bold py-3 px-6 rounded-full transition duration-300">
+                    <i class="fas fa-phone ml-2"></i>
+                    09175913293
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-xl">SJ</div>
+                        <span class="mr-2 font-bold text-xl">اسمارت جاب</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">تخصص ما تبدیل ایده‌های شما به دیجیتال است. با تیمی مجرب و خلاق در خدمت شما هستیم.</p>
+                    <div class="flex space-x-4 space-x-reverse">
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-purple-600 text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-blue-600 text-white">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-blue-500 text-white">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-gray-700 text-white">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">خدمات ما</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">طراحی سایت اختصاصی</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">فروشگاه اینترنتی</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">بهینه‌سازی سئو</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">طراحی اپلیکیشن موبایل</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">تبلیغات گوگل ادز</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">لینک‌های مفید</h3>
+                    <ul class="space-y-2">
+                        <li><a href="nemoone.html" class="text-gray-400 hover:text-white transition">نمونه کارها</a></li>
+                        <li><a href="weblog.html" class="text-gray-400 hover:text-white transition">وبلاگ</a></li>
+                        <li><a href="about us.html" class="text-gray-400 hover:text-white transition">درباره ما</a></li>
+                        <li><a href="contact us.html" class="text-gray-400 hover:text-white transition">تماس با ما</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">سوالات متداول</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">تماس با ما</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-gray-500 ml-2 mt-1"></i>
+                            <span class="text-gray-400">شیراز</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone text-gray-500 ml-2"></i>
+                            <a href="tel:+989175913293" class="text-gray-400 hover:text-white transition">09175913293</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-gray-500 ml-2"></i>
+                            <a href="smartjob.site.seo@gmail.com" class="text-gray-400 hover:text-white transition">smartjob.site.seo@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
+                <p>© 1404 اسمارت جاب. تمام حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#" id="backToTop" class="back-to-top fixed bottom-6 left-6 w-12 h-12 rounded-full gradient-bg text-white flex items-center justify-center shadow-lg transition opacity-0 invisible">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 hidden">
+        <div class="bg-white rounded-xl max-w-md w-full p-8 text-center">
+            <div class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center text-green-500 text-3xl mx-auto mb-6">
+                <i class="fas fa-check"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">درخواست شما ثبت شد!</h3>
+            <p class="text-gray-600 mb-6">کارشناسان ما در کمتر از 24 ساعت با شما تماس خواهند گرفت. در صورت نیاز فوری می‌توانید با شماره 021-22345678 تماس بگیرید.</p>
+            <button id="closeModal" class="gradient-bg hover:opacity-90 text-white font-bold py-3 px-6 rounded-full transition w-full">
+                متوجه شدم
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                backToTop.classList.remove('opacity-100', 'visible');
+                backToTop.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        // Form Submission
+        const consultationForm = document.getElementById('consultationForm');
+        const successModal = document.getElementById('successModal');
+        const closeModal = document.getElementById('closeModal');
+        
+        consultationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Here you would normally send the form data to your server
+            // For demo purposes, we'll just show the success modal
+            successModal.classList.remove('hidden');
+            
+            // Reset form
+            consultationForm.reset();
+        });
+        
+        closeModal.addEventListener('click', () => {
+            successModal.classList.add('hidden');
+        });
+
+        // Service Options Selection
+        const serviceOptions = document.querySelectorAll('.service-option input');
+        
+        serviceOptions.forEach(option => {
+            option.addEventListener('change', () => {
+                const label = option.nextElementSibling;
+                if (option.checked) {
+                    label.classList.add('border-purple-500', 'bg-purple-50');
+                } else {
+                    label.classList.remove('border-purple-500', 'bg-purple-50');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

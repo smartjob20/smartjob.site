@@ -1,0 +1,1540 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خانه | اسمارت جاب</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --primary: #6e8efb;
+            --secondary: #a777e3;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+		
+		.process-step {
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        
+		.process-step:hover {
+            transform: translateY(-10px);
+        }
+        
+        .process-step::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            top: -20px;
+            right: 20px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 0 0 8px rgba(110, 142, 251, 0.2);
+        }
+        
+        .process-connector {
+            position: absolute;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            right: 40px;
+            top: 0;
+            z-index: 1;
+        }
+        
+        .process-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: linear-gradient(135deg, rgba(110, 142, 251, 0.1), rgba(167, 119, 227, 0.1));
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .process-step:hover .process-icon {
+            transform: rotate(10deg) scale(1.1);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+		
+		.hover-effect:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .tooltip {
+            position: relative;
+        }
+        
+        .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            right: 50%;
+            transform: translateX(50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+		
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(167, 119, 227, 0.1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: rgba(167, 119, 227, 0.3);
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(110, 142, 251, 0.9), rgba(167, 119, 227, 0.9));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .input-focus:focus {
+            box-shadow: 0 0 0 3px rgba(167, 119, 227, 0.3);
+            border-color: var(--secondary);
+        }
+        
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 0 0 4px rgba(110, 142, 251, 0.2);
+        }
+        
+        .testimonial-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 80px;
+            color: rgba(110, 142, 251, 0.1);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .nav-link {
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+        
+        .counter-item {
+            position: relative;
+            padding: 20px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .counter-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            transition: height 0.8s ease;
+        }
+        
+        .counter-item.active::before {
+            height: 100%;
+        }
+        
+        .counter-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .pricing-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(167, 119, 227, 0.1);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: rgba(167, 119, 227, 0.3);
+        }
+        
+        .pricing-popular {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-popular::before {
+            content: 'پرفروش';
+            position: absolute;
+            top: 20px;
+            left: -30px;
+            background-color: var(--secondary);
+            color: white;
+            padding: 3px 30px;
+            transform: rotate(-45deg);
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .contact-info-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(167, 119, 227, 0.1);
+        }
+        
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: rgba(167, 119, 227, 0.3);
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+        
+        .back-to-top {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .swiper-pagination-bullet-active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: linear-gradient(135deg, rgba(110, 142, 251, 0.1), rgba(167, 119, 227, 0.1));
+            color: var(--secondary);
+        }
+        
+        .feature-item {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .video-modal {
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .video-modal.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .video-overlay {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        
+        .video-container {
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+        
+        .video-modal.open .video-container {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-xl">SJ</div>
+                <span class="mr-2 font-bold text-xl gradient-text">اسمارت جاب</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-6 space-x-reverse">
+				<a href="index.html" class="nav-link text-gray-700 hover:text-purple-600 transition">خانه</a>
+                <a href="services.html" class="nav-link text-gray-700 hover:text-purple-600 transition">خدمات</a>
+                <a href="nemoone.html" class="nav-link text-gray-700 hover:text-purple-600 transition">نمونه کارها</a>
+				<a href="features.html" class="nav-link text-gray-700 hover:text-purple-600 transition">ویژگی‌ها</a>
+                <a href="farayand.html" class="nav-link text-gray-700 hover:text-purple-600 transition">فرآیند کار</a>
+                <a href="tarefe.html" class="nav-link text-gray-700 hover:text-purple-600 transition">تعرفه‌ها</a>
+				<a href="about us.html" class="nav-link text-gray-700 hover:text-purple-600 transition">درباره ما</a>
+                <a href="contact us.html" class="nav-link text-gray-700 hover:text-purple-600 transition">تماس با ما</a>
+				<a href="weblog.html" class="nav-link text-gray-700 hover:text-purple-600 transition">وبلاگ ها</a>
+            </div>
+            
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <a href="moshavere.html" class="hidden md:block gradient-bg hover:opacity-90 text-white font-bold py-2 px-4 rounded-full transition text-sm">درخواست مشاوره</a>
+                <button id="mobileMenuButton" class="md:hidden text-gray-700 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu bg-white shadow-lg md:hidden">
+            <div class="px-4 py-3 space-y-3">
+                <a href="#home" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">خانه</a>
+                <a href="#services" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">خدمات</a>
+                <a href="#portfolio" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">نمونه کارها</a>
+                <a href="#process" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">فرآیند کار</a>
+                <a href="#features" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">ویژگی‌ها</a>
+                <a href="#pricing" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">تعرفه‌ها</a>
+                <a href="#contact" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">تماس با ما</a>
+                <a href="#contact" class="block gradient-bg hover:opacity-90 text-white font-bold py-2 px-4 rounded-full transition text-center">درخواست مشاوره</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24 gradient-bg text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==')]"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center relative z-10">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <div class="inline-block bg-white/20 backdrop-blur-sm rounded-full px-4 py-1 mb-4">
+                    <span class="text-sm font-medium">طراحی سایت حرفه‌ای</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">تبدیل ایده‌های شما به <span class="text-yellow-400 font-bold drop-shadow">واقعیت</span></h1>
+                <p class="text-xl mb-8 opacity-90 max-w-lg">با تیمی متخصص و خلاق، وبسایت شما را به ابزاری قدرتمند برای رشد کسب و کارتان تبدیل می‌کنیم. از طراحی تا پیاده‌سازی و سئو.</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="contact us.html" class="bg-white text-purple-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-full transition duration-300 text-center shadow-lg hover:shadow-xl">شروع پروژه</a>
+                    <a href="#" id="playButton" class="flex items-center justify-center border-2 border-white hover:bg-white hover:bg-opacity-10 font-bold py-3 px-6 rounded-full transition duration-300 text-center">
+                        <i class="fas fa-play ml-2"></i> ویدئو معرفی
+                    </a>
+                </div>
+                
+                <div class="mt-10 flex items-center space-x-6 space-x-reverse">
+                    <div class="flex -space-x-2">
+                        <img src="img/logo.png" class="w-10 h-10 rounded-full border-2 border-white" alt="Team member">
+                        <img src="img/logo.png" class="w-10 h-10 rounded-full border-2 border-white" alt="Team member">
+                        <img src="img/logo.png" class="w-10 h-10 rounded-full border-2 border-white" alt="Team member">
+                    </div>
+                    <div>
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 ml-1"></i>
+                            <i class="fas fa-star text-yellow-400 ml-1"></i>
+                            <i class="fas fa-star text-yellow-400 ml-1"></i>
+                            <i class="fas fa-star text-yellow-400 ml-1"></i>
+                            <i class="fas fa-star text-yellow-400 ml-1"></i>
+                        </div>
+                        <p class="text-sm opacity-80">بیش از 70 مشتری راضی</p>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center relative">
+                <img src="img/poster.png" alt="Web Design" class="rounded-2xl shadow-2xl w-full max-w-md animate-float border-8 border-white/20">
+                <div class="absolute -bottom-10 -left-10 w-32 h-32 rounded-full bg-purple-400/20 blur-3xl"></div>
+                <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-blue-400/20 blur-3xl"></div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator">
+            <a href="#services" class="text-white text-2xl">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="video-overlay absolute inset-0" id="videoOverlay"></div>
+        <div class="video-container relative w-full max-w-4xl bg-black rounded-xl overflow-hidden">
+            <button id="closeVideo" class="absolute top-4 left-4 z-10 text-white text-2xl hover:text-gray-300 transition">
+                <i class="fas fa-times"></i>
+            </button>
+            <iframe id="videoFrame" class="w-full aspect-video" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+	    <!-- Clients Section -->
+<!--
+    <section class="py-8 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="swiper clientsSwiper">
+                <div class="swiper-wrapper py-4">
+                    <div class="swiper-slide flex justify-center">
+                        <img src="img/poster.png" alt="Client Logo" class="h-12 opacity-60 hover:opacity-100 transition">
+                    </div>
+                    <div class="swiper-slide flex justify-center">
+                        <img src="img/poster.png" alt="Client Logo" class="h-12 opacity-60 hover:opacity-100 transition">
+                    </div>
+                    <div class="swiper-slide flex justify-center">
+                        <img src="img/poster.png" alt="Client Logo" class="h-12 opacity-60 hover:opacity-100 transition">
+                    </div>
+                    <div class="swiper-slide flex justify-center">
+                        <img src="img/poster.png" alt="Client Logo" class="h-12 opacity-60 hover:opacity-100 transition">
+                    </div>
+                    <div class="swiper-slide flex justify-center">
+                        <img src="img/poster.png" alt="Client Logo" class="h-12 opacity-60 hover:opacity-100 transition">
+                    </div>
+                    <div class="swiper-slide flex justify-center">
+                        <img src="img/poster.png" alt="Client Logo" class="h-12 opacity-60 hover:opacity-100 transition">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	-->
+    <!-- Stats Section -->
+    <section class="py-12 bg-gradient-to-b from-white to-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="counter-item text-center">
+                    <div class="counter-number" data-count="70">0</div>
+                    <div class="text-gray-600 font-medium">پروژه موفق</div>
+                </div>
+                <div class="counter-item text-center">
+                    <div class="counter-number" data-count="98">0</div>
+                    <div class="text-gray-600 font-medium">رضایت مشتریان</div>
+                </div>
+                <div class="counter-item text-center">
+                    <div class="counter-number" data-count="20">0</div>
+                    <div class="text-gray-600 font-medium">ارتباط فعال</div>
+                </div>
+                <div class="counter-item text-center">
+                    <div class="counter-number" data-count="3">0</div>
+                    <div class="text-gray-600 font-medium">سال تجربه</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">خدمات ما</span>
+                <h2 class="text-3xl font-bold mb-4">خدمات تخصصی اسمارت جاب</h2>
+                <p class="text-gray-600">با استفاده از جدیدترین تکنولوژی‌های روز دنیا، بهترین راهکارهای دیجیتال مارکتینگ را برای کسب و کار شما ارائه می‌دهیم.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white rounded-xl shadow-sm overflow-hidden p-6">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">طراحی سایت اختصاصی</h3>
+                    <p class="text-gray-600 mb-4">طراحی وبسایت کاملاً سفارشی متناسب با برند و نیازهای کسب و کار شما با جدیدترین تکنولوژی‌های روز دنیا.</p>
+                    <ul class="text-gray-600 space-y-2 mb-4">
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> طراحی ریسپانسیو</li>
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> رابط کاربری حرفه‌ای</li>
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> بهینه‌سازی سرعت</li>
+                    </ul>
+                    <a href="#" class="inline-flex items-center text-purple-600 font-semibold hover:text-purple-800 transition">
+                        اطلاعات بیشتر
+                        <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-white rounded-xl shadow-sm overflow-hidden p-6">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">فروشگاه اینترنتی</h3>
+                    <p class="text-gray-600 mb-4">طراحی فروشگاه اینترنتی با امکانات کامل فروش آنلاین، درگاه پرداخت و مدیریت محصولات.</p>
+                    <ul class="text-gray-600 space-y-2 mb-4">
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> سیستم مدیریت محصولات</li>
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> درگاه پرداخت امن</li>
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> پنل مدیریت پیشرفته</li>
+                    </ul>
+                    <a href="#" class="inline-flex items-center text-purple-600 font-semibold hover:text-purple-800 transition">
+                        اطلاعات بیشتر
+                        <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-white rounded-xl shadow-sm overflow-hidden p-6">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">بهینه‌سازی موتورهای جستجو (سئو)</h3>
+                    <p class="text-gray-600 mb-4">بهبود رتبه سایت شما در نتایج جستجوی گوگل و افزایش ترافیک ارگانیک با استراتژی‌های اثبات شده سئو.</p>
+                    <ul class="text-gray-600 space-y-2 mb-4">
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> سئو تکنیکال</li>
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> سئو محتوایی</li>
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> سئو خارجی</li>
+                    </ul>
+                    <a href="#" class="inline-flex items-center text-purple-600 font-semibold hover:text-purple-800 transition">
+                        اطلاعات بیشتر
+                        <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card bg-white rounded-xl shadow-sm overflow-hidden p-6">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">طراحی اپلیکیشن موبایل</h3>
+                    <p class="text-gray-600 mb-4">طراحی و توسعه اپلیکیشن‌های موبایل اندروید و iOS با بهترین تجربه کاربری و عملکرد.</p>
+                    <ul class="text-gray-600 space-y-2 mb-4">
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> رابط کاربری جذاب</li>
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> عملکرد سریع</li>
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> امنیت بالا</li>
+                    </ul>
+                    <a href="#" class="inline-flex items-center text-purple-600 font-semibold hover:text-purple-800 transition">
+                        اطلاعات بیشتر
+                        <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card bg-white rounded-xl shadow-sm overflow-hidden p-6">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-ad"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">تبلیغات گوگل ادز</h3>
+                    <p class="text-gray-600 mb-4">مدیریت حرفه‌ای کمپین‌های تبلیغاتی گوگل ادز برای جذب مشتریان هدفمند با کمترین هزینه.</p>
+                    <ul class="text-gray-600 space-y-2 mb-4">
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> تبلیغات کلیکی هدفمند</li>
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> کمپین‌های نمایشی</li>
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> تبلیغات ویدیویی</li>
+                    </ul>
+                    <a href="#" class="inline-flex items-center text-purple-600 font-semibold hover:text-purple-800 transition">
+                        اطلاعات بیشتر
+                        <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card bg-white rounded-xl shadow-sm overflow-hidden p-6">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">هاست و دامنه</h3>
+                    <p class="text-gray-600 mb-4">ارائه خدمات میزبانی وب با کیفیت بالا، امنیت فوق‌العاده و پشتیبانی 24 ساعته.</p>
+                    <ul class="text-gray-600 space-y-2 mb-4">
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> هاست پرسرعت</li>
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> ثبت دامنه</li>
+                        <li class="flex items-center"><i class="fas fa-check text-purple-500 ml-2"></i> پشتیبانی فنی</li>
+                    </ul>
+                    <a href="#" class="inline-flex items-center text-purple-600 font-semibold hover:text-purple-800 transition">
+                        اطلاعات بیشتر
+                        <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">چرا ما؟</span>
+                <h2 class="text-3xl font-bold mb-4">ویژگی‌های منحصر به فرد اسمارت جاب</h2>
+                <p class="text-gray-600">ما با ارائه راهکارهای خلاقانه و تکنولوژی‌های روز دنیا، کسب و کار شما را به سطح جدیدی می‌رسانیم.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-item bg-gray-50 p-6 rounded-xl">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">طراحی سریع و بهینه</h3>
+                    <p class="text-gray-600">با استفاده از جدیدترین فریمورک‌ها، وبسایت شما را با بالاترین سرعت و کیفیت طراحی می‌کنیم.</p>
+                </div>
+                
+                <div class="feature-item bg-gray-50 p-6 rounded-xl">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-mobile-screen"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">واکنش‌گرا در همه دستگاه‌ها</h3>
+                    <p class="text-gray-600">سایت شما در تمام دستگاه‌ها از موبایل تا دسکتاپ به بهترین شکل نمایش داده می‌شود.</p>
+                </div>
+                
+                <div class="feature-item bg-gray-50 p-6 rounded-xl">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">امنیت فوق‌العاده</h3>
+                    <p class="text-gray-600">با پیاده‌سازی آخرین استانداردهای امنیتی، از داده‌های شما محافظت می‌کنیم.</p>
+                </div>
+                
+                <div class="feature-item bg-gray-50 p-6 rounded-xl">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">تحلیل و گزارش‌دهی</h3>
+                    <p class="text-gray-600">گزارش‌های دقیق از عملکرد سایت و تحلیل رفتار کاربران ارائه می‌دهیم.</p>
+                </div>
+                
+                <div class="feature-item bg-gray-50 p-6 rounded-xl">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">پشتیبانی 24/7</h3>
+                    <p class="text-gray-600">تیم پشتیبانی ما به صورت 24 ساعته آماده پاسخگویی به سوالات شماست.</p>
+                </div>
+                
+                <div class="feature-item bg-gray-50 p-6 rounded-xl">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">بهینه‌سازی برای سئو</h3>
+                    <p class="text-gray-600">سایت شما را برای موتورهای جستجو بهینه می‌کنیم تا در نتایج بالاتر قرار بگیرید.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">نمونه کارها</span>
+                <h2 class="text-3xl font-bold mb-4">پروژه‌های موفق ما</h2>
+                <p class="text-gray-600">نمونه‌هایی از پروژه‌های موفق اجرا شده توسط تیم حرفه‌ای اسمارت جاب</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Portfolio Item 1 -->
+                <div class="portfolio-item">
+                    <img src="resume/پورتفولیو 2/img/پورتفولیو 2.png" alt="Portfolio 1" class="w-full h-64 md:h-80 object-contain">
+                    <div class="portfolio-overlay">
+                        <h3 class="text-white text-xl font-bold mb-2">وبسایت پورتفولیو (شخصی)</h3>
+                        <p class="text-white text-sm mb-4">طراحی و توسعه وبسایت شخصی برای توسعه هر چیزی که از خودتون میخواهید</p>
+                        <div class="flex space-x-3 space-x-reverse">
+                            <a href="resume/پورتفولیو 2/index.html" class="text-white text-sm border border-white hover:bg-white hover:text-purple-600 px-3 py-1 rounded-full transition">مشاهده دمو</a>
+                            <a href="resume/پورتفولیو 2/index.html" class="text-white text-sm border border-white hover:bg-white hover:text-purple-600 px-3 py-1 rounded-full transition">جزئیات پروژه</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 2 -->
+                <div class="portfolio-item">
+                    <img src="resume/فروشگاه لباس 11/img/فروشگاه لباس 11.png" alt="Portfolio 2" class="w-full h-64 md:h-80 object-contain">
+                    <div class="portfolio-overlay">
+                        <h3 class="text-white text-xl font-bold mb-2">وبسایت فروشگاهی</h3>
+                        <p class="text-white text-sm mb-4">طراحی وبسایت پیشرفته و حرفه ای&nbsp; فروشگاه لباس که نمایش محصولات شمارو به اوج زیبایی میرسونه</p>
+                        <div class="flex space-x-3 space-x-reverse">
+                            <a href="resume/فروشگاه لباس 11/lebas.html" class="text-white text-sm border border-white hover:bg-white hover:text-purple-600 px-3 py-1 rounded-full transition">مشاهده دمو</a>
+                            <a href="resume/فروشگاه لباس 11/lebas.html" class="text-white text-sm border border-white hover:bg-white hover:text-purple-600 px-3 py-1 rounded-full transition">جزئیات پروژه</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 3 -->
+                <div class="portfolio-item">
+                    <img src="resume/کافه 6/img/منو کافه 6.png" alt="Portfolio 3" class="w-full h-64 md:h-80 object-contain">
+                    <div class="portfolio-overlay">
+                        <h3 class="text-white text-xl font-bold mb-2">منو دیجیتال کاه و رستوران&nbsp;&nbsp;</h3>
+                        <p class="text-white text-sm mb-4">طراحی جذاب منو دیجیتال برای کافه ها و رستوران ها به صورت کاملا شخصی سازی شده و منحصر به فرد&nbsp;&nbsp;</p>
+                        <div class="flex space-x-3 space-x-reverse">
+                            <a href="resume/کافه 6/ai change.html" class="text-white text-sm border border-white hover:bg-white hover:text-purple-600 px-3 py-1 rounded-full transition">مشاهده دمو</a>
+                            <a href="resume/کافه 6/ai change.html" class="text-white text-sm border border-white hover:bg-white hover:text-purple-600 px-3 py-1 rounded-full transition">جزئیات پروژه</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 4 -->
+                <div class="portfolio-item">
+                    <img src="resume/فروشگاه اسباب بازی 1/imgs/فروشگاه اسباب بازی 1.png" alt="Portfolio 4" class="w-full h-64 md:h-80 object-contain">
+                    <div class="portfolio-overlay">
+                        <h3 class="text-white text-xl font-bold mb-2">سایت فروشگاه اسباب بازی</h3>
+                        <p class="text-white text-sm mb-4">طراحی زیبا و دلنشین فروشگاه اسباب بازی با دسته بندی دقیق محصولات</p>
+                        <div class="flex space-x-3 space-x-reverse">
+                            <a href="resume/فروشگاه اسباب بازی 1/index.html" class="text-white text-sm border border-white hover:bg-white hover:text-purple-600 px-3 py-1 rounded-full transition">مشاهده دمو</a>
+                            <a href="resume/فروشگاه اسباب بازی 1/index.html" class="text-white text-sm border border-white hover:bg-white hover:text-purple-600 px-3 py-1 rounded-full transition">جزئیات پروژه</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 5 -->
+                <div class="portfolio-item">
+                    <img src="resume/دکوراسیون خانه 1/img/دکوراسیون خانه 1.png" alt="Portfolio 5" class="w-full h-64 md:h-80 object-contain">
+                    <div class="portfolio-overlay">
+                        <h3 class="text-white text-xl font-bold mb-2">وبسایت فروشگاه لوازم دکوراسیون</h3>
+                        <p class="text-white text-sm mb-4">طراحی سایت فروشگاهی لوازم دکوراسیون با رابط کاربری زیبا&nbsp;</p>
+                        <div class="flex space-x-3 space-x-reverse">
+                            <a href="resume/دکوراسیون خانه 1/home.html" class="text-white text-sm border border-white hover:bg-white hover:text-purple-600 px-3 py-1 rounded-full transition">مشاهده دمو</a>
+                            <a href="resume/دکوراسیون خانه 1/home.html" class="text-white text-sm border border-white hover:bg-white hover:text-purple-600 px-3 py-1 rounded-full transition">جزئیات پروژه</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 6 -->
+                <div class="portfolio-item">
+                    <img src="resume/لوازم آشپزخانه 1/img/لوازم خانگی 1.png" alt="Portfolio 6" class="w-full h-64 md:h-80 object-contain">
+                    <div class="portfolio-overlay">
+                        <h3 class="text-white text-xl font-bold mb-2">وبسایت فروشگاهی لوازم آشپزخانه</h3>
+                        <p class="text-white text-sm mb-4">طراحی سایت فروشگاهی لوازم آشپزخانه با زیبا ترین جلوه ها برای به نمایش گزاشتن هر چه بهتر محصولات&nbsp; &nbsp; &nbsp;</p>
+                        <div class="flex space-x-3 space-x-reverse">
+                            <a href="resume/لوازم آشپزخانه 1/index.html" class="text-white text-sm border border-white hover:bg-white hover:text-purple-600 px-3 py-1 rounded-full transition">مشاهده دمو</a>
+                            <a href="resume/لوازم آشپزخانه 1/index.html" class="text-white text-sm border border-white hover:bg-white hover:text-purple-600 px-3 py-1 rounded-full transition">جزئیات پروژه</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center gradient-bg hover:opacity-90 text-white font-bold py-3 px-6 rounded-full transition shadow-lg hover:shadow-xl">
+                    مشاهده همه نمونه کارها
+                    <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+<section id="process" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16 max-w-3xl mx-auto">
+            <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">فرآیند کار</span>
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">چگونه با هم همکاری می‌کنیم؟</h2>
+            <p class="text-gray-600 text-lg">فرآیند ۶ مرحله‌ای ما برای تحویل پروژه‌های موفق و باکیفیت</p>
+        </div>
+        
+        <!-- Process Timeline -->
+        <div class="relative">
+            <!-- Process Connector Line -->
+            <div class="hidden md:block process-connector"></div>
+            
+            <!-- Process Steps -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="process-step bg-gray-50 rounded-xl p-8 hover-effect" data-step="1">
+                    <div class="process-icon mb-6">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">مشاوره و تحلیل نیازها</h3>
+                    <p class="text-gray-600 mb-4">جلسه مشاوره رایگان برای درک کامل اهداف و نیازهای کسب و کار شما</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">مصاحبه</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">تحلیل رقبا</span>
+                        <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">نیازسنجی</span>
+                    </div>
+                    <div class="mt-4 tooltip">
+                        <span class="text-sm text-gray-500 cursor-help hover:text-purple-600">
+                            <i class="fas fa-info-circle ml-1"></i> نکات مهم این مرحله
+                        </span>
+                        <span class="tooltip-text">تعیین اهداف پروژه، بررسی نمونه‌های موفق، تحلیل رقبا و تعیین بودجه</span>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="process-step bg-gray-50 rounded-xl p-8 hover-effect" data-step="2">
+                    <div class="process-icon mb-6">
+                        <i class="fas fa-pencil-ruler"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">طراحی وایرفریم و UI/UX</h3>
+                    <p class="text-gray-600 mb-4">طراحی ساختار و رابط کاربری جذاب متناسب با هویت برند شما</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">وایرفریم</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">پروتوتایپ</span>
+                        <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">طرح نهایی</span>
+                    </div>
+                    <div class="mt-4 tooltip">
+                        <span class="text-sm text-gray-500 cursor-help hover:text-purple-600">
+                            <i class="fas fa-info-circle ml-1"></i> نکات مهم این مرحله
+                        </span>
+                        <span class="tooltip-text">طراحی کاربرپسند، سازگاری با هویت برند، توجه به تجربه کاربری و تأیید نهایی مشتری</span>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="process-step bg-gray-50 rounded-xl p-8 hover-effect" data-step="3">
+                    <div class="process-icon mb-6">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">توسعه Front-end</h3>
+                    <p class="text-gray-600 mb-4">پیاده‌سازی دقیق طرح‌های تایید شده با بهترین تکنولوژی‌های روز</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">HTML/CSS</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">JavaScript</span>
+                        <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">React/Vue</span>
+                    </div>
+                    <div class="mt-4 tooltip">
+                        <span class="text-sm text-gray-500 cursor-help hover:text-purple-600">
+                            <i class="fas fa-info-circle ml-1"></i> نکات مهم این مرحله
+                        </span>
+                        <span class="tooltip-text">پیاده‌سازی دقیق طرح، توجه به جزئیات، سرعت بارگذاری و سازگاری با دستگاه‌های مختلف</span>
+                    </div>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="process-step bg-gray-50 rounded-xl p-8 hover-effect" data-step="4">
+                    <div class="process-icon mb-6">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">توسعه Back-end</h3>
+                    <p class="text-gray-600 mb-4">پیاده‌سازی منطق کسب و کار و سیستم مدیریت محتوا</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">PHP/Node.js</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Database</span>
+                        <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">API</span>
+                    </div>
+                    <div class="mt-4 tooltip">
+                        <span class="text-sm text-gray-500 cursor-help hover:text-purple-600">
+                            <i class="fas fa-info-circle ml-1"></i> نکات مهم این مرحله
+                        </span>
+                        <span class="tooltip-text">امنیت بالا، عملکرد بهینه، قابلیت توسعه‌پذیری و یکپارچه‌سازی با سیستم‌های دیگر</span>
+                    </div>
+                </div>
+                
+                <!-- Step 5 -->
+                <div class="process-step bg-gray-50 rounded-xl p-8 hover-effect" data-step="5">
+                    <div class="process-icon mb-6">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">تست و کنترل کیفیت</h3>
+                    <p class="text-gray-600 mb-4">بررسی جامع تمام بخش‌ها قبل از تحویل نهایی</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">تست عملکردی</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">تست امنیتی</span>
+                        <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">تست کاربری</span>
+                    </div>
+                    <div class="mt-4 tooltip">
+                        <span class="text-sm text-gray-500 cursor-help hover:text-purple-600">
+                            <i class="fas fa-info-circle ml-1"></i> نکات مهم این مرحله
+                        </span>
+                        <span class="tooltip-text">تست Cross-browser، تست سرعت، تست امنیتی، تست کاربری و رفع تمام ایرادات</span>
+                    </div>
+                </div>
+                
+                <!-- Step 6 -->
+                <div class="process-step bg-gray-50 rounded-xl p-8 hover-effect" data-step="6">
+                    <div class="process-icon mb-6">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">تحویل و پشتیبانی</h3>
+                    <p class="text-gray-600 mb-4">راه‌اندازی پروژه و ارائه پشتیبانی بلندمدت</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">آموزش</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">مستندات</span>
+                        <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">پشتیبانی</span>
+                    </div>
+                    <div class="mt-4 tooltip">
+                        <span class="text-sm text-gray-500 cursor-help hover:text-purple-600">
+                            <i class="fas fa-info-circle ml-1"></i> نکات مهم این مرحله
+                        </span>
+                        <span class="tooltip-text">آموزش مدیریت محتوا، تحویل مستندات فنی، پشتیبانی 6 ماهه رایگان و خدمات پس از فروش</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Process Details -->
+        <div class="mt-20 bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl overflow-hidden">
+            <div class="grid md:grid-cols-2">
+                <div class="p-10">
+                    <h3 class="text-2xl font-bold mb-4">چرا این فرآیند مؤثر است؟</h3>
+                    <p class="text-gray-600 mb-6">فرآیند 6 مرحله‌ای ما نتیجه سال‌ها تجربه در طراحی و توسعه پروژه‌های موفق است. این روش تضمین می‌کند که:</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="bg-purple-100 text-purple-800 p-2 rounded-lg ml-3">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span class="text-gray-700">تمام نیازهای کسب و کار شما به دقت تحلیل و پیاده‌سازی شود</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-purple-100 text-purple-800 p-2 rounded-lg ml-3">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span class="text-gray-700">هیچ مرحله‌ای بدون تأیید نهایی شما پیش نرود</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-purple-100 text-purple-800 p-2 rounded-lg ml-3">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span class="text-gray-700">کیفیت کار در تمام مراحل کنترل و تضمین شود</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-purple-100 text-purple-800 p-2 rounded-lg ml-3">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span class="text-gray-700">پروژه در زمان تعیین شده و با بودجه پیش‌بینی شده تحویل داده شود</span>
+                        </li>
+                    </ul>
+                </div>
+				<img src="../../smart job/img/n (3).png">
+                <div class="bg-[url('img/n (1).png')] bg-cover bg-center hidden md:block"></div>
+            </div>
+        </div>
+        
+        <!-- CTA -->
+        <div class="mt-16 text-center">
+            <h3 class="text-2xl font-bold mb-4">آماده شروع پروژه خود هستید؟</h3>
+            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">فرم درخواست مشاوره را پر کنید تا در کمتر از 24 ساعت با شما تماس بگیریم و درباره پروژه شما صحبت کنیم.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="wy website.html" class="gradient-bg hover:opacity-90 text-white font-bold py-3 px-8 rounded-full transition shadow-lg hover:shadow-xl">
+              خیلی ساده و خلاصه: چرا به سایت نیازد داریم؟ </a>
+                <a href="contact us.html" class="border-2 border-purple-500 text-purple-600 hover:bg-purple-500 hover:text-white font-bold py-3 px-8 rounded-full transition">
+                    <i class="fas fa-phone-alt ml-2"></i> تماس تلفنی
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <div class="text-center mb-12">
+            <h3 class="text-2xl font-bold mb-4">سوالات متداول درباره فرآیند کار</h3>
+            <p class="text-gray-600">پاسخ به رایج‌ترین سوالات مشتریان درباره فرآیند طراحی و توسعه</p>
+        </div>
+        
+        <div class="space-y-4">
+            <!-- FAQ 1 -->
+            <div class="border border-gray-200 rounded-xl overflow-hidden hover:border-purple-300 transition">
+                <button class="faq-toggle w-full flex justify-between items-center p-6 bg-white hover:bg-gray-50 transition">
+                    <span class="font-semibold text-right">مدت زمان هر مرحله چقدر است؟</span>
+                    <i class="fas fa-chevron-down text-purple-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-content hidden p-6 bg-white border-t border-gray-200">
+                    <p class="text-gray-600">مدت زمان هر مرحله بستگی به پیچیدگی پروژه دارد، اما به طور معمول:</p>
+                    <ul class="text-gray-600 mt-4 space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-purple-500 mt-2 ml-2"></i>
+                            <span>مرحله 1 (مشاوره): 1-3 روز کاری</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-purple-500 mt-2 ml-2"></i>
+                            <span>مرحله 2 (طراحی): 1-2 هفته</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-purple-500 mt-2 ml-2"></i>
+                            <span>مرحله 3 و 4 (توسعه): 2-4 هفته</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-purple-500 mt-2 ml-2"></i>
+                            <span>مرحله 5 (تست): 3-7 روز کاری</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- FAQ 2 -->
+            <div class="border border-gray-200 rounded-xl overflow-hidden hover:border-purple-300 transition">
+                <button class="faq-toggle w-full flex justify-between items-center p-6 bg-white hover:bg-gray-50 transition">
+                    <span class="font-semibold text-right">آیا می‌توانیم برخی مراحل را حذف کنیم؟</span>
+                    <i class="fas fa-chevron-down text-purple-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-content hidden p-6 bg-white border-t border-gray-200">
+                    <p class="text-gray-600">هر یک از این مراحل به دقت طراحی شده‌اند تا کیفیت نهایی کار را تضمین کنند. حذف هر مرحله ممکن است بر کیفیت پروژه تأثیر منفی بگذارد. با این حال، برای پروژه‌های خاص می‌توان با مشورت تیم فنی، تغییراتی در فرآیند اعمال کرد.</p>
+                </div>
+            </div>
+            
+            <!-- FAQ 3 -->
+            <div class="border border-gray-200 rounded-xl overflow-hidden hover:border-purple-300 transition">
+                <button class="faq-toggle w-full flex justify-between items-center p-6 bg-white hover:bg-gray-50 transition">
+                    <span class="font-semibold text-right">نقش ما در هر مرحله چیست؟</span>
+                    <i class="fas fa-chevron-down text-purple-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-content hidden p-6 bg-white border-t border-gray-200">
+                    <p class="text-gray-600">شما در هر مرحله نقش مهمی دارید:</p>
+                    <ul class="text-gray-600 mt-4 space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-purple-500 mt-2 ml-2"></i>
+                            <span>مرحله 1: ارائه اطلاعات دقیق درباره کسب و کار و نیازها</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-purple-500 mt-2 ml-2"></i>
+                            <span>مرحله 2: تأیید طرح‌های اولیه و نهایی</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-purple-500 mt-2 ml-2"></i>
+                            <span>مرحله 5: مشارکت در تست نهایی و گزارش ایرادات</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-purple-500 mt-2 ml-2"></i>
+                            <span>مرحله 6: دریافت آموزش‌های لازم و تأیید نهایی پروژه</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">نظرات مشتریان</span>
+                <h2 class="text-3xl font-bold mb-4">آنچه مشتریان ما می‌گویند</h2>
+                <p class="text-gray-600">رضایت مشتریان اولویت اصلی ماست. اینجا برخی از نظرات آنها را می‌بینید.</p>
+            </div>
+            
+            <div class="swiper testimonialsSwiper">
+                <div class="swiper-wrapper pb-12">
+                    <!-- Testimonial 1 -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-card bg-white p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden">
+                                    <img src="img/logo.png" alt="Customer" class="w-full h-full object-cover">
+                                </div>
+                                <div class="mr-3">
+                                    <h4 class="font-bold">نازنین محمدی</h4>
+                                    <p class="text-gray-500 text-sm">مدیر فروشگاه اینترنتی</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mb-4">طراحی فروشگاه اینترنتی ما توسط دیجیتال استودیو بسیار حرفه‌ای انجام شد. رضایت کامل دارم و ترافیک سایت ما بعد از سئو ۳ برابر شده است.</p>
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-card bg-white p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden">
+                                    <img src="img/logo.png" alt="Customer" class="w-full h-full object-cover">
+                                </div>
+                                <div class="mr-3">
+                                    <h4 class="font-bold">امیر حسینی</h4>
+                                    <p class="text-gray-500 text-sm">مدیر عامل شرکت</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mb-4">وبسایت شرکتی که دیجیتال استودیو برای ما طراحی کرد، کاملاً حرفه‌ای و متناسب با برند ما بود. پشتیبانی عالی هم دارند.</p>
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-card bg-white p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden">
+                                    <img src="img/logo.png" alt="Customer" class="w-full h-full object-cover">
+                                </div>
+                                <div class="mr-3">
+                                    <h4 class="font-bold">سارا رضایی</h4>
+                                    <p class="text-gray-500 text-sm">هنرمند و عکاس</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mb-4">وبسایت گالری آثار من توسط این تیم طراحی شد و واقعاً از نتیجه کار راضی هستم. رابط کاربری بسیار زیبا و کاربرپسند است.</p>
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 4 -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-card bg-white p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden">
+                                    <img src="img/logo.png" alt="Customer" class="w-full h-full object-cover">
+                                </div>
+                                <div class="mr-3">
+                                    <h4 class="font-bold">رضا کریمی</h4>
+                                    <p class="text-gray-500 text-sm">مدیر فروشگاه آنلاین</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mb-4">فروشگاه اینترنتی که طراحی کردند واقعاً عالی بود. در کمتر از 3 ماه توانستیم به سوددهی برسیم. ممنون از تیم حرفه‌ای شما.</p>
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">تعرفه‌ها</span>
+                <h2 class="text-3xl font-bold mb-4">بسته‌های خدمات ما</h2>
+                <p class="text-gray-600">بسته‌های متنوع خدمات ما با قیمت‌های کاملاً رقابتی و منصفانه</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Basic Plan -->
+                <div class="pricing-card bg-white rounded-xl shadow-sm overflow-hidden p-6">
+                    <h3 class="text-xl font-bold mb-2">پکیج پایه</h3>
+                    <p class="text-gray-600 mb-4">مناسب برای کسب و کارهای کوچک و استارتاپ‌ها</p>
+                    <div class="text-4xl font-bold mb-6">5 میلیون تومان</div>
+                    <ul class="text-gray-600 space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 ml-2"></i> طراحی ۵ صفحه اصلی</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 ml-2"></i> ریسپانسیو</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 ml-2"></i> فرم تماس</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 ml-2"></i> پنل مدیریت محتوا</li>
+                        <li class="flex items-center"><i class="fas fa-times text-red-500 ml-2"></i> سئو اولیه</li>
+                        <li class="flex items-center"><i class="fas fa-times text-red-500 ml-2"></i> گالری تصاویر</li>
+                    </ul>
+                    <a href="#contact" class="block bg-gray-100 hover:bg-purple-600 hover:text-white text-purple-600 font-bold py-3 px-6 rounded-full transition text-center">درخواست مشاوره</a>
+                </div>
+                
+                <!-- Popular Plan -->
+                <div class="pricing-card pricing-popular bg-white rounded-xl shadow-md overflow-hidden p-6 relative">
+                    <h3 class="text-xl font-bold mb-2">پکیج استاندارد</h3>
+                    <p class="text-gray-600 mb-4">مناسب برای کسب و کارهای متوسط و شرکتی</p>
+                    <div class="text-4xl font-bold mb-6">11 میلیون تومان</div>
+                    <ul class="text-gray-600 space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 ml-2"></i> طراحی ۱۰ صفحه اصلی</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 ml-2"></i> ریسپانسیو</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 ml-2"></i> فرم تماس پیشرفته</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 ml-2"></i> پنل مدیریت محتوا</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 ml-2"></i> سئو اولیه</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 ml-2"></i> گالری تصاویر</li>
+                    </ul>
+                    <a href="#contact" class="block gradient-bg hover:opacity-90 text-white font-bold py-3 px-6 rounded-full transition text-center">درخواست مشاوره</a>
+                </div>
+                
+                <!-- Premium Plan -->
+                <div class="pricing-card bg-white rounded-xl shadow-sm overflow-hidden p-6">
+                    <h3 class="text-xl font-bold mb-2">پکیج پیشرفته</h3>
+                    <p class="text-gray-600 mb-4">مناسب برای کسب و کارهای بزرگ و فروشگاه‌های اینترنتی</p>
+                    <div class="text-4xl font-bold mb-6">25+ میلیون تومان</div>
+                    <ul class="text-gray-600 space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 ml-2"></i> طراحی نامحدود صفحات</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 ml-2"></i> ریسپانسیو</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 ml-2"></i> سیستم فروش اینترنتی</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 ml-2"></i> پنل مدیریت پیشرفته</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 ml-2"></i> سئو حرفه‌ای</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 ml-2"></i> گالری چندرسانه‌ای</li>
+                    </ul>
+                    <a href="#contact" class="block bg-gray-100 hover:bg-purple-600 hover:text-white text-purple-600 font-bold py-3 px-6 rounded-full transition text-center">درخواست مشاوره</a>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-gray-600 mb-4">پروژه شما شرایط خاصی دارد؟ برای دریافت پیش فاکتور اختصاصی با ما تماس بگیرید.</p>
+                <a href="#contact" class="inline-flex items-center border-2 border-purple-500 hover:bg-purple-500 hover:text-white text-purple-500 font-bold py-3 px-6 rounded-full transition">
+                    درخواست پیش فاکتور اختصاصی
+                    <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">سوالات متداول</span>
+                <h2 class="text-3xl font-bold mb-4">پاسخ به سوالات شما</h2>
+                <p class="text-gray-600">پاسخ به رایج‌ترین سوالات شما درباره خدمات طراحی سایت و سئو</p>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-4 bg-white hover:bg-gray-50 transition">
+                        <span class="font-semibold text-right">مدت زمان طراحی یک وبسایت چقدر است؟</span>
+                        <i class="fas fa-chevron-down text-purple-500 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 bg-white">
+                        <p class="text-gray-600">مدت زمان طراحی وبسایت بستگی به نوع و پیچیدگی پروژه دارد. به طور معمول:</p>
+                        <ul class="text-gray-600 mt-2 space-y-2">
+                            <li class="flex items-start"><i class="fas fa-circle text-xs text-purple-500 mt-2 ml-2"></i> وبسایت شرکتی ساده: 2 تا 3 هفته</li>
+                            <li class="flex items-start"><i class="fas fa-circle text-xs text-purple-500 mt-2 ml-2"></i> وبسایت شرکتی پیشرفته: 4 تا 6 هفته</li>
+                            <li class="flex items-start"><i class="fas fa-circle text-xs text-purple-500 mt-2 ml-2"></i> فروشگاه اینترنتی: 6 تا 8 هفته</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- FAQ 2 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-4 bg-white hover:bg-gray-50 transition">
+                        <span class="font-semibold text-right">هزینه طراحی وبسایت چقدر است؟</span>
+                        <i class="fas fa-chevron-down text-purple-500 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 bg-white">
+                        <p class="text-gray-600">هزینه طراحی وبسایت بسته به نوع و امکانات مورد نیاز متفاوت است. ما سه پکیج پایه (15 میلیون تومان)، استاندارد (30 میلیون تومان) و پیشرفته (60 میلیون تومان) داریم. برای پروژه‌های خاص می‌توانید پیش فاکتور اختصاصی دریافت کنید.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 3 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-4 bg-white hover:bg-gray-50 transition">
+                        <span class="font-semibold text-right">آیا وبسایت طراحی شده ریسپانسیو خواهد بود؟</span>
+                        <i class="fas fa-chevron-down text-purple-500 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 bg-white">
+                        <p class="text-gray-600">بله، تمام وبسایت‌هایی که ما طراحی می‌کنیم به صورت کاملاً ریسپانسیو هستند و در تمام دستگاه‌های موبایل، تبلت و دسکتاپ به درستی نمایش داده می‌شوند.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 4 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-4 bg-white hover:bg-gray-50 transition">
+                        <span class="font-semibold text-right">آیا سئو سایت هم انجام می‌دهید؟</span>
+                        <i class="fas fa-chevron-down text-purple-500 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 bg-white">
+                        <p class="text-gray-600">بله، ما خدمات سئو را به صورت تخصصی ارائه می‌دهیم. در پکیج‌های استاندارد و پیشرفته طراحی سایت، سئو اولیه نیز انجام می‌شود. برای سئو حرفه‌ای می‌توانید بسته‌های اختصاصی سئو را انتخاب کنید.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 5 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-4 bg-white hover:bg-gray-50 transition">
+                        <span class="font-semibold text-right">آیا بعد از تحویل پروژه پشتیبانی دارید؟</span>
+                        <i class="fas fa-chevron-down text-purple-500 transition-transform duration-300"></i>
+					</button>
+                    <div class="faq-content hidden p-6 bg-white border-t border-gray-200">
+                        <p class="text-gray-600">بله، تمام پروژه‌های ما شامل 6 ماه پشتیبانی رایگان می‌شوند. پس از این مدت می‌توانید بسته‌های پشتیبانی سالانه را خریداری کنید. پشتیبانی شامل رفع خطاها، بروزرسانی‌های جزئی و مشاوره فنی می‌شود.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-gray-600 mb-6">پاسخ سوال خود را پیدا نکردید؟ با ما تماس بگیرید</p>
+                <a href="contact us.html" class="inline-flex items-center gradient-bg hover:opacity-90 text-white font-bold py-3 px-8 rounded-full transition shadow-lg hover:shadow-xl">
+                    <i class="fas fa-headset ml-2"></i> تماس با پشتیبانی
+                </a>
+            </div>
+        </div>
+    </section>
+					
+		<!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <!-- About -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-xl">DS</div>
+                        <span class="mr-2 font-bold text-xl gradient-text">دیجیتال استودیو</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">ما با ترکیب خلاقیت و تکنولوژی، کسب و کار شما را در دنیای دیجیتال متحول می‌کنیم.</p>
+                    <div class="flex space-x-4 space-x-reverse">
+                        <a href="https://www.instagram.com/smartjob_site" target="_blank" class="social-icon bg-gray-800 hover:bg-purple-600 text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://t.me/proxy?server=141.11.26.34&port=443&secret=7rXpXsHm4qJ_nKJvoq_oq_ptZWRpYS5zdGVhbXBvd2VyZWQuY29t" target="_blank" class="social-icon bg-gray-800 hover:bg-blue-600 text-white">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-blue-500 text-white">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-red-500 text-white">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">خدمات</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">طراحی سایت اختصاصی</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">فروشگاه اینترنتی</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">سئو و بهینه‌سازی سایت</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">طراحی اپلیکیشن موبایل</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">دیجیتال مارکتینگ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Links -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">لینک‌های مفید</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">نمونه کارها</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">وبلاگ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">درباره ما</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">تماس با ما</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">سوالات متداول</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">تماس با ما</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-purple-500 mt-1 ml-2"></i>
+                            <span class="text-gray-400">شیراز</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-purple-500 mt-1 ml-2"></i>
+                            <span class="text-gray-400">09175913293</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-purple-500 mt-1 ml-2"></i>
+                            <span class="text-gray-400">smartjob.site.seo@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">© 1404 اسمارت جاب. تمام حقوق محفوظ است.</p>
+                <div class="flex space-x-6 space-x-reverse">
+                    <a href="#" class="text-gray-500 hover:text-white transition">قوانین و مقررات</a>
+                    <a href="#" class="text-gray-500 hover:text-white transition">حریم خصوصی</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+				
+						
+	<!-- Back to Top Button -->
+  <button id="backToTop" class="fixed bottom-6 left-6 back-to-top bg-white text-purple-600 p-3 rounded-full shadow-md hidden z-50">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // Back to top button
+    const backToTop = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backToTop.classList.remove("hidden");
+      } else {
+        backToTop.classList.add("hidden");
+      }
+    });
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Counter animation
+    const counters = document.querySelectorAll(".counter-number");
+    const options = { threshold: 0.5 };
+    const callback = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const updateCount = () => {
+            const target = +el.dataset.count;
+            const count = +el.innerText;
+            const speed = 10;
+            const increment = Math.ceil(target / speed);
+            if (count < target) {
+              el.innerText = count + increment;
+              setTimeout(updateCount, 50);
+            } else {
+              el.innerText = target;
+              el.parentElement.classList.add("active");
+            }
+          };
+          updateCount();
+          observer.unobserve(el);
+        }
+      });
+    };
+    const observer = new IntersectionObserver(callback, options);
+    counters.forEach(counter => observer.observe(counter));
+    // FAQ Toggle
+    const faqToggles = document.querySelectorAll(".faq-toggle");
+    faqToggles.forEach(toggle => {
+      toggle.addEventListener("click", () => {
+        const content = toggle.nextElementSibling;
+        content.classList.toggle("hidden");
+        toggle.querySelector("i").classList.toggle("rotate-180");
+      });
+    });
+
+    // Swiper setup for testimonials
+    new Swiper(".testimonialsSwiper", {
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
+  </script>
+	<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuButton = document.getElementById("mobileMenuButton");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    if (menuButton && mobileMenu) {
+      menuButton.addEventListener("click", function () {
+        mobileMenu.classList.toggle("open");
+      });
+    }
+  });
+</script>
+
+</body>
+
+</html>

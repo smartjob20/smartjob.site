@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ویژگی‌ها | اسمارت جاب</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --primary: #6e8efb;
+            --secondary: #a777e3;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .feature-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(167, 119, 227, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: rgba(167, 119, 227, 0.3);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(110, 142, 251, 0.03), rgba(167, 119, 227, 0.03));
+            z-index: -1;
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            background: linear-gradient(135deg, rgba(110, 142, 251, 0.1), rgba(167, 119, 227, 0.1));
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: rotate(5deg) scale(1.1);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .nav-link {
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .section-divider {
+            position: relative;
+            height: 80px;
+            overflow: hidden;
+        }
+        
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 200%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transform: skewY(-3deg);
+            transform-origin: top left;
+            z-index: -1;
+        }
+        
+        .tech-stack-item {
+            transition: all 0.3s ease;
+            filter: grayscale(100%);
+            opacity: 0.7;
+        }
+        
+        .tech-stack-item:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        .comparison-table {
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            border-left: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .comparison-table th:first-child, .comparison-table td:first-child {
+            border-left: none;
+        }
+        
+        .feature-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-xl">SJ</div>
+                <span class="mr-2 font-bold text-xl gradient-text">اسمارت جاب</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-6 space-x-reverse">
+				<a href="index.html" class="nav-link text-gray-700 hover:text-purple-600 transition">خانه</a>
+                <a href="services.html" class="nav-link text-gray-700 hover:text-purple-600 transition">خدمات</a>
+                <a href="nemoone.html" class="nav-link text-gray-700 hover:text-purple-600 transition">نمونه کارها</a>
+				<a href="features.html" class="nav-link text-gray-700 hover:text-purple-600 transition">ویژگی‌ها</a>
+                <a href="farayand.html" class="nav-link text-gray-700 hover:text-purple-600 transition">فرآیند کار</a>
+                <a href="tarefe.html" class="nav-link text-gray-700 hover:text-purple-600 transition">تعرفه‌ها</a>
+				<a href="about us.html" class="nav-link text-gray-700 hover:text-purple-600 transition">درباره ما</a>
+                <a href="contact us.html" class="nav-link text-gray-700 hover:text-purple-600 transition">تماس با ما</a>
+				<a href="weblog.html" class="nav-link text-gray-700 hover:text-purple-600 transition">وبلاگ ها</a>
+            </div>
+            
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <a href="moshavere.html" class="hidden md:block gradient-bg hover:opacity-90 text-white font-bold py-2 px-4 rounded-full transition text-sm">درخواست مشاوره</a>
+                <button id="mobileMenuButton" class="md:hidden text-gray-700 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu bg-white shadow-lg md:hidden">
+            <div class="px-4 py-3 space-y-3">
+                <a href="index.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">خانه</a>
+                <a href="services.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">خدمات</a>
+                <a href="portfolio.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">نمونه کارها</a>
+                <a href="process.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">فرآیند کار</a>
+                <a href="features.html" class="block py-2 px-4 rounded-lg bg-purple-50 text-purple-600 font-bold transition">ویژگی‌ها</a>
+                <a href="pricing.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">تعرفه‌ها</a>
+                <a href="contact.html" class="block py-2 px-4 rounded-lg hover:bg-gray-100 transition">تماس با ما</a>
+                <a href="consultation.html" class="block gradient-bg hover:opacity-90 text-white font-bold py-2 px-4 rounded-full transition text-center">درخواست مشاوره</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 gradient-bg text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==')]"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 flex flex-col items-center text-center relative z-10">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">ویژگی‌های منحصر به فرد <span class="text-yellow-400">اسمارت جاب</span></h1>
+            <p class="text-xl mb-8 opacity-90 max-w-3xl">با استفاده از جدیدترین تکنولوژی‌ها و متدهای روز دنیا، وبسایتی حرفه‌ای، سریع و ایمن برای شما طراحی می‌کنیم</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="#features" class="bg-white text-purple-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-full transition duration-300 text-center shadow-lg hover:shadow-xl">مشاهده ویژگی‌ها</a>
+                <a href="#compare" class="flex items-center justify-center border-2 border-white hover:bg-white hover:bg-opacity-10 font-bold py-3 px-6 rounded-full transition duration-300 text-center">
+                    مقایسه با سایرین
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-0 left-0 right-0 section-divider"></div>
+    </section>
+
+    <!-- Core Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">مزایای رقابتی</span>
+                <h2 class="text-3xl font-bold mb-4">چرا باید ما را انتخاب کنید؟</h2>
+                <p class="text-gray-600">ویژگی‌هایی که ما را از سایر شرکت‌های طراحی سایت متمایز می‌کند</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-white rounded-xl shadow-sm overflow-hidden p-8 relative">
+                    <span class="feature-badge">پرطرفدار</span>
+                    <div class="feature-icon mb-6 mx-auto">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">سرعت فوق‌العاده</h3>
+                    <p class="text-gray-600 text-center">با بهینه‌سازی کدها و استفاده از آخرین تکنولوژی‌ها، وبسایت شما با بالاترین سرعت ممکن بارگذاری می‌شود که تاثیر مستقیمی بر تجربه کاربری و سئو دارد.</p>
+                    <div class="mt-6 pt-6 border-t border-gray-100 flex justify-center">
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 ml-2"></i> بارگذاری زیر 1 ثانیه</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 ml-2"></i> بهینه‌سازی تصاویر</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 ml-2"></i> کشینگ پیشرفته</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card bg-white rounded-xl shadow-sm overflow-hidden p-8 relative">
+                    <div class="feature-icon mb-6 mx-auto">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">امنیت تضمینی</h3>
+                    <p class="text-gray-600 text-center">با پیاده‌سازی آخرین استانداردهای امنیتی، از داده‌های شما در برابر حملات سایبری محافظت می‌کنیم.</p>
+                    <div class="mt-6 pt-6 border-t border-gray-100 flex justify-center">
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 ml-2"></i> SSL رایگان</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 ml-2"></i> فایروال اختصاصی</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 ml-2"></i> پشتیبان‌گیری روزانه</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card bg-white rounded-xl shadow-sm overflow-hidden p-8 relative">
+                    <span class="feature-badge">جدید</span>
+                    <div class="feature-icon mb-6 mx-auto">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">طراحی واکنشگرا</h3>
+                    <p class="text-gray-600 text-center">وبسایت شما در تمام دستگاه‌ها از موبایل تا تبلت و دسکتاپ به بهترین شکل نمایش داده می‌شود.</p>
+                    <div class="mt-6 pt-6 border-t border-gray-100 flex justify-center">
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 ml-2"></i> سازگار با تمام صفحه‌نمایش‌ها</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 ml-2"></i> رابط کاربری تطبیقی</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 ml-2"></i> تست شده بر روی 50+ دستگاه</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card bg-white rounded-xl shadow-sm overflow-hidden p-8 relative">
+                    <div class="feature-icon mb-6 mx-auto">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">سئو داخلی</h3>
+                    <p class="text-gray-600 text-center">سایت شما از ابتدا برای موتورهای جستجو بهینه‌سازی می‌شود تا در نتایج بالاتر قرار بگیرید.</p>
+                    <div class="mt-6 pt-6 border-t border-gray-100 flex justify-center">
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 ml-2"></i> ساختار سئو پسند</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 ml-2"></i> متا تگ‌های اختصاصی</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 ml-2"></i> نقشه سایت XML</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card bg-white rounded-xl shadow-sm overflow-hidden p-8 relative">
+                    <div class="feature-icon mb-6 mx-auto">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">پنل مدیریت پیشرفته</h3>
+                    <p class="text-gray-600 text-center">با پنل مدیریت اختصاصی ما، به راحتی محتوای سایت خود را بدون نیاز به دانش فنی به روزرسانی کنید.</p>
+                    <div class="mt-6 pt-6 border-t border-gray-100 flex justify-center">
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 ml-2"></i> ویرایشگر WYSIWYG</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 ml-2"></i> آمار بازدید آنلاین</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 ml-2"></i> مدیریت کاربران</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card bg-white rounded-xl shadow-sm overflow-hidden p-8 relative">
+                    <span class="feature-badge">اختصاصی</span>
+                    <div class="feature-icon mb-6 mx-auto">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">پشتیبانی 24/7</h3>
+                    <p class="text-gray-600 text-center">تیم پشتیبانی ما به صورت 24 ساعته و در 7 روز هفته آماده پاسخگویی به سوالات شماست.</p>
+                    <div class="mt-6 pt-6 border-t border-gray-100 flex justify-center">
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 ml-2"></i> پاسخگویی در کمتر از 1 ساعت</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 ml-2"></i> پشتیبانی تلفنی و آنلاین</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-purple-500 ml-2"></i> آپتایم 99.9%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">تکنولوژی‌ها</span>
+                <h2 class="text-3xl font-bold mb-4">تکنولوژی‌های پیشرفته ما</h2>
+                <p class="text-gray-600">ما از بهترین و جدیدترین تکنولوژی‌های روز دنیا برای طراحی وبسایت شما استفاده می‌کنیم</p>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                <div class="tech-stack-item flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg" alt="Vue.js" class="h-16 w-16 object-contain">
+                    <span class="mt-3 font-medium">Vue.js</span>
+                </div>
+                <div class="tech-stack-item flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" class="h-16 w-16 object-contain">
+                    <span class="mt-3 font-medium">React</span>
+                </div>
+                <div class="tech-stack-item flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" alt="Node.js" class="h-16 w-16 object-contain">
+                    <span class="mt-3 font-medium">Node.js</span>
+                </div>
+                <div class="tech-stack-item flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg" alt="Laravel" class="h-16 w-16 object-contain">
+                    <span class="mt-3 font-medium">Laravel</span>
+                </div>
+                <div class="tech-stack-item flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg" alt="PHP" class="h-16 w-16 object-contain">
+                    <span class="mt-3 font-medium">PHP</span>
+                </div>
+                <div class="tech-stack-item flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" alt="Tailwind CSS" class="h-16 w-16 object-contain">
+                    <span class="mt-3 font-medium">Tailwind CSS</span>
+                </div>
+                <div class="tech-stack-item flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Sass_Logo_Color.svg" alt="Sass" class="h-16 w-16 object-contain">
+                    <span class="mt-3 font-medium">Sass</span>
+                </div>
+                <div class="tech-stack-item flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg" alt="VS Code" class="h-16 w-16 object-contain">
+                    <span class="mt-3 font-medium">VS Code</span>
+                </div>
+                <div class="tech-stack-item flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma" class="h-16 w-16 object-contain">
+                    <span class="mt-3 font-medium">Figma</span>
+                </div>
+                <div class="tech-stack-item flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Git-logo.svg" alt="Git" class="h-16 w-16 object-contain">
+                    <span class="mt-3 font-medium">Git</span>
+                </div>
+                <div class="tech-stack-item flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/db/Npm-logo.svg" alt="npm" class="h-16 w-16 object-contain">
+                    <span class="mt-3 font-medium">npm</span>
+                </div>
+                <div class="tech-stack-item flex flex-col items-center">
+                    <img src="img/next-js-logo.png" alt="Next.js" class="h-16 w-16 object-contain">
+                    <span class="mt-3 font-medium">Next.js</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section id="compare" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <span class="inline-block gradient-bg text-white text-sm font-bold px-4 py-1 rounded-full mb-4">مقایسه</span>
+                <h2 class="text-3xl font-bold mb-4">ما چگونه متفاوت هستیم؟</h2>
+                <p class="text-gray-600">مقایسه خدمات ما با سایر شرکت‌های طراحی سایت</p>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="comparison-table w-full bg-white rounded-xl overflow-hidden shadow-sm">
+                    <thead>
+                        <tr class="bg-gray-50">
+                            <th class="py-4 px-6 text-right font-bold text-gray-700">ویژگی</th>
+                            <th class="py-4 px-6 text-center font-bold text-gray-700">شرکت‌های معمولی</th>
+                            <th class="py-4 px-6 text-center font-bold text-purple-600 bg-purple-50">دیجیتال استودیو</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-4 px-6 font-medium">زمان تحویل پروژه</td>
+                            <td class="py-4 px-6 text-center text-gray-600">4-8 هفته</td>
+                            <td class="py-4 px-6 text-center text-purple-600 font-bold bg-purple-50">2-4 هفته</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 font-medium">پشتیبانی پس از تحویل</td>
+                            <td class="py-4 px-6 text-center text-gray-600">1 ماه</td>
+                            <td class="py-4 px-6 text-center text-purple-600 font-bold bg-purple-50">3 ماه رایگان</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 font-medium">بهینه‌سازی برای موبایل</td>
+                            <td class="py-4 px-6 text-center text-gray-600">اساساً</td>
+                            <td class="py-4 px-6 text-center text-purple-600 font-bold bg-purple-50">Mobile-First</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 font-medium">امنیت وبسایت</td>
+                            <td class="py-4 px-6 text-center text-gray-600">پایه‌ای</td>
+                            <td class="py-4 px-6 text-center text-purple-600 font-bold bg-purple-50">پیشرفته</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 font-medium">سئو داخلی</td>
+                            <td class="py-4 px-6 text-center text-gray-600">ندارد</td>
+                            <td class="py-4 px-6 text-center text-purple-600 font-bold bg-purple-50">دارد</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 font-medium">آموزش مدیریت محتوا</td>
+                            <td class="py-4 px-6 text-center text-gray-600">1 جلسه</td>
+                            <td class="py-4 px-6 text-center text-purple-600 font-bold bg-purple-50">3 جلسه + ویدئو آموزشی</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 font-medium">گواهی SSL</td>
+                            <td class="py-4 px-6 text-center text-gray-600">پولی</td>
+                            <td class="py-4 px-6 text-center text-purple-600 font-bold bg-purple-50">رایگان</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 font-medium">پشتیبان‌گیری خودکار</td>
+                            <td class="py-4 px-6 text-center text-gray-600">هفتگی</td>
+                            <td class="py-4 px-6 text-center text-purple-600 font-bold bg-purple-50">روزانه</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <a href="contact us.html" class="inline-flex items-center gradient-bg hover:opacity-90 text-white font-bold py-3 px-6 rounded-full transition shadow-lg hover:shadow-xl">
+                    درخواست مشاوره رایگان
+                    <i class="fas fa-arrow-left mr-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 gradient-bg text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">آماده شروع پروژه خود هستید؟</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">همین حالا با ما تماس بگیرید و از مشاوره رایگان ما بهره‌مند شوید</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="tel:+989175913293" class="bg-white text-purple-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-full transition duration-300 text-center shadow-lg hover:shadow-xl">
+                    <i class="fas fa-phone ml-2"></i> تماس با ما
+                </a>
+                <a href="contact us.html" class="flex items-center justify-center border-2 border-white hover:bg-white hover:bg-opacity-10 font-bold py-3 px-6 rounded-full transition duration-300 text-center">
+                    <i class="fas fa-envelope ml-2"></i> ارسال پیام
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-xl">SJ</div>
+                        <span class="mr-2 font-bold text-xl gradient-text">اسمارت جاب</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">ما با ارائه راهکارهای خلاقانه و تکنولوژی‌های روز دنیا، کسب و کار شما را به سطح جدیدی می‌رسانیم.</p>
+                    <div class="flex space-x-4 space-x-reverse">
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-purple-600">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-blue-600">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-blue-500">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 hover:bg-red-600">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">لینک‌های سریع</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">خانه</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-white transition">خدمات</a></li>
+                        <li><a href="nemoone.html" class="text-gray-400 hover:text-white transition">نمونه کارها</a></li>
+                        <li><a href="tarefe.html" class="text-gray-400 hover:text-white transition">تعرفه‌ها</a></li>
+                        <li><a href="weblog.html" class="text-gray-400 hover:text-white transition">وبلاگ</a></li>
+                        <li><a href="contact us.html" class="text-gray-400 hover:text-white transition">تماس با ما</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">خدمات ما</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">طراحی سایت اختصاصی</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">فروشگاه اینترنتی</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">سئو و بهینه‌سازی</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">تبلیغات گوگل ادز</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">طراحی اپلیکیشن</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">میزبانی وب</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">تماس با ما</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 ml-2 text-purple-500"></i>
+                            <span>شیراز</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone ml-2 text-purple-500"></i>
+                            <a href="tel:+989175913293">09175913293</a>
+                        </li>
+                        <!--<li class="flex items-center">
+                            <i class="fas fa-mobile-alt ml-2 text-purple-500"></i>
+                            <a href="tel:+989123456789">0912-345-6789</a>
+                        </li>-->
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope ml-2 text-purple-500"></i>
+                            <a href="mailto:info@digitalstudio.com">smartjob.site.seo@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 1404 اسمارت جاب. تمام حقوق محفوظ است.</p>
+                <div class="flex space-x-6 space-x-reverse">
+                    <a href="#" class="text-gray-500 hover:text-white text-sm transition">قوانین و مقررات</a>
+                    <a href="#" class="text-gray-500 hover:text-white text-sm transition">حریم خصوصی</a>
+                </div>
+            </div>
+        </div>
+        
+        <a href="#" class="back-to-top fixed bottom-6 left-6 w-12 h-12 rounded-full gradient-bg text-white flex items-center justify-center shadow-lg">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+        
+        // FAQ Toggle
+        const faqToggles = document.querySelectorAll('.faq-toggle');
+        
+        faqToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const content = toggle.nextElementSibling;
+                const icon = toggle.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+        });
+        
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter-number');
+        const speed = 200;
+        
+        function animateCounters() {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-count');
+                const count = +counter.innerText;
+                const increment = target / speed;
+                
+                if(count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(animateCounters, 1);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        }
+        
+        // Activate counters when scrolled to
+        window.addEventListener('scroll', () => {
+            const counterSection = document.querySelector('.counter-item');
+            const counterPosition = counterSection.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            
+            if(counterPosition < screenPosition) {
+                counters.forEach(counter => {
+                    counter.classList.add('active');
+                });
+                animateCounters();
+            }
+        });
+        
+        // Video Modal
+        const playButton = document.getElementById('playButton');
+        const videoModal = document.getElementById('videoModal');
+        const videoOverlay = document.getElementById('videoOverlay');
+        const closeVideo = document.getElementById('closeVideo');
+        const videoFrame = document.getElementById('videoFrame');
+        
+        if(playButton) {
+            playButton.addEventListener('click', () => {
+                videoModal.classList.add('open');
+                videoFrame.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1";
+            });
+        }
+        
+        closeVideo.addEventListener('click', () => {
+            videoModal.classList.remove('open');
+            videoFrame.src = "";
+        });
+        
+        videoOverlay.addEventListener('click', () => {
+            videoModal.classList.remove('open');
+            videoFrame.src = "";
+        });
+        
+        // Initialize Swiper
+        new Swiper('.testimonialsSwiper', {
+            loop: true,
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 1,
+                },
+                768: {
+                    slidesPerView: 2,
+                },
+            }
+        });
+    </script>
+</body>
+</html>
